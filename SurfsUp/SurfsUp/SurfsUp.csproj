@@ -6,4 +6,8 @@
     <RootNamespace>SurfsUp.SurfsUp</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Notifier\Notifier.csproj" />
+  </ItemGroup>
+
 </Project>
