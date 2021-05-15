@@ -1,6 +1,6 @@
 using System;
 
-namespace SurfsUp.Models
+namespace SurfsUp.SurfsUp.Models
 {
     public class ErrorViewModel
     {

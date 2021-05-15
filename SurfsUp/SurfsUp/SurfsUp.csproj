@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>SurfsUp</AssemblyName>
+    <RootNamespace>SurfsUp.SurfsUp</RootNamespace>
   </PropertyGroup>
 
 </Project>

@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SurfsUp.Models;
+using SurfsUp.SurfsUp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SurfsUp.Controllers
+namespace SurfsUp.SurfsUp.Controllers
 {
     public class HomeController : Controller
     {
