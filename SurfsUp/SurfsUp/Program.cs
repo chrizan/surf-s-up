@@ -1,13 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using SurfsUp.Notifier.Contract;
-using SurfsUp.Notifier.Notifier;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SurfsUp.DataProvider.Contract;
+using SurfsUp.DataProvider.Data;
+using SurfsUp.Notifier;
 
 namespace SurfsUp.SurfsUp
 {
@@ -15,14 +11,7 @@ namespace SurfsUp.SurfsUp
     {
         public static void Main(string[] args)
         {
-            StartNotifier();
             CreateHostBuilder(args).Build().Run();
-        }
-
-        private static void StartNotifier()
-        {
-            INotifier notifier = new MswNotifier();
-            notifier.Start();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -30,6 +19,11 @@ namespace SurfsUp.SurfsUp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<NotifierService>();
+                    services.AddSingleton<IDataProvider, MswDataProvider>();
                 });
     }
 }

@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurfsUp", "SurfsUp\SurfsUp.csproj", "{CB84FEC2-1ABC-4FC1-AE33-6B6A42AE036A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProvider", "DataProvider\DataProvider.csproj", "{2A19B8F2-7CA4-412A-A177-C04AA02CDD31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataProvider", "DataProvider\DataProvider.csproj", "{2A19B8F2-7CA4-412A-A177-C04AA02CDD31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProvider.Tests", "DataProvider.Tests\DataProvider.Tests.csproj", "{5F823800-B3DF-4559-AAAC-120E4A879CDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataProvider.Tests", "DataProvider.Tests\DataProvider.Tests.csproj", "{5F823800-B3DF-4559-AAAC-120E4A879CDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifier", "Notifier\Notifier.csproj", "{C6F8BD34-6C02-446B-BA0B-E5AAC6AA2D88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier", "Notifier\Notifier.csproj", "{C6F8BD34-6C02-446B-BA0B-E5AAC6AA2D88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
