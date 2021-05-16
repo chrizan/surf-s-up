@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SurfsUp.DataProvider.Contract;
 using SurfsUp.DataProvider.Data;
-using SurfsUp.Notifier;
+using SurfsUp.SurfsUp.Notifier;
 
 namespace SurfsUp.SurfsUp
 {
