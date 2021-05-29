@@ -5,6 +5,7 @@ using SurfsUp.DataProvider.Models;
 using System;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -58,6 +59,19 @@ namespace SurfsUp.SurfsUp.Notifier
             MailMessage message = new MailMessage(from, to);
             message.Subject = "Using the new SMTP client.";
             message.Body = @"Using this new feature, you can send an email message from an application very easily.";
+
+            // Construct the alternate body as HTML.
+            string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+            body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">";
+            body += "</HEAD><BODY><DIV><FONT face=Arial color=#ff0000 size=15>Hello from SurfsUp";
+            body += "</FONT></DIV></BODY></HTML>";
+
+            ContentType mimeType = new System.Net.Mime.ContentType("text/html");
+            // Add the alternate body to the message.
+
+            AlternateView alternate = AlternateView.CreateAlternateViewFromString(body, mimeType);
+            message.AlternateViews.Add(alternate);
+
             SmtpClient client = new SmtpClient(server)
             {
                 Port = 587,
