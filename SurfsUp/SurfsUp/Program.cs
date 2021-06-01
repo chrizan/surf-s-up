@@ -6,6 +6,7 @@ using Quartz;
 using SurfsUp.DataProvider.Contract;
 using SurfsUp.DataProvider.Data;
 using SurfsUp.SurfsUp.Jobs;
+using SurfsUp.SurfsUp.Messengers;
 using System;
 
 namespace SurfsUp.SurfsUp
@@ -33,8 +34,8 @@ namespace SurfsUp.SurfsUp
                     services.AddQuartz(q =>
                     {
                         q.UseMicrosoftDependencyInjectionJobFactory();
-
-                        services.AddSingleton<IDataProvider, MswDataProvider>();
+                        services.AddTransient<IDataProvider, MswDataProvider>();
+                        services.AddTransient<IMessenger, MailMessenger>();
 
                         var jobKey = new JobKey("jobKeyName", "jobKeyGroup");
                         q.AddJob<Job>(jobKey, j => j.WithDescription("my awesome job"));
