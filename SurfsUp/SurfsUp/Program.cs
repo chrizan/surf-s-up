@@ -7,6 +7,8 @@ using SurfsUp.DataProvider.Contract;
 using SurfsUp.DataProvider.Data;
 using SurfsUp.SurfsUp.Jobs;
 using SurfsUp.SurfsUp.Messengers;
+using SurfsUp.SurfsUp.SwellAssessment;
+using SurfsUp.SurfsUp.SwellAssessment.Strategies;
 using System;
 
 namespace SurfsUp.SurfsUp
@@ -36,6 +38,9 @@ namespace SurfsUp.SurfsUp
                         q.UseMicrosoftDependencyInjectionJobFactory();
                         services.AddTransient<IDataProvider, MswDataProvider>();
                         services.AddTransient<IMessenger, MailMessenger>();
+                        services.AddTransient<IEvaluator, Evaluator>();
+                        services.AddTransient<IStrategy, ItalyStrategy>();
+                        services.AddTransient<IStrategy, FranceStrategy>();
 
                         var jobKey = new JobKey("jobKeyName", "jobKeyGroup");
                         q.AddJob<Job>(jobKey, j => j.WithDescription("my awesome job"));

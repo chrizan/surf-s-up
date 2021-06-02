@@ -1,12 +1,16 @@
 ﻿using SurfsUp.DataProvider.Models;
-using SurfsUp.SurfsUp.SwellAssessment.Strategy;
+using System.Collections.Generic;
 
 namespace SurfsUp.SurfsUp.SwellAssessment
 {
+    public enum Strategy
+    {
+        Italy,
+        France
+    }
+
     public interface IEvaluator
     {
-        IStrategy Strategy { set; }
-
-        void Evaluate(SwellData swellData);
+        ISet<string> Evaluate(SwellData swellData, Strategy strategy);
     }
 }

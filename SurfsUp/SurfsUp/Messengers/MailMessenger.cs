@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
@@ -16,14 +17,14 @@ namespace SurfsUp.SurfsUp.Messengers
             Configuration = configuration;
         }
 
-        public Task SendMessage()
+        public Task SendMessage(string spotName, string spotUrl, ISet<string> dates)
         {
             string from = Configuration.GetSection("Mail").GetValue<string>("Sender");
             string to = Configuration.GetSection("Mail").GetValue<string>("Recipient");
             MailMessage message = new MailMessage(from, to)
             {
-                Subject = "Using the new SMTP client.",
-                Body = @"Using this new feature, you can send an email message from an application very easily."
+                Subject = $"{spotName} is firing!",
+                Body = $"Checkout {spotUrl}"
             };
 
             // Construct the alternate body as HTML.
