@@ -1,7 +1,9 @@
-﻿namespace SurfsUp.SurfsUp.SwellAssessment.Strategy
+﻿using SurfsUp.DataProvider.Models;
+
+namespace SurfsUp.SurfsUp.SwellAssessment.Strategy
 {
     public interface IStrategy
     {
-        void Assess();
+        void Assess(SwellData swellData);
     }
 }

@@ -1,4 +1,5 @@
-﻿using SurfsUp.SurfsUp.SwellAssessment.Strategy;
+﻿using SurfsUp.DataProvider.Models;
+using SurfsUp.SurfsUp.SwellAssessment.Strategy;
 
 namespace SurfsUp.SurfsUp.SwellAssessment
 {
@@ -6,6 +7,6 @@ namespace SurfsUp.SurfsUp.SwellAssessment
     {
         IStrategy Strategy { set; }
 
-        void Evaluate();
+        void Evaluate(SwellData swellData);
     }
 }
