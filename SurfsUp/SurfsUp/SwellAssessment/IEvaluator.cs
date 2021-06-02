@@ -1,4 +1,5 @@
 ﻿using SurfsUp.DataProvider.Models;
+using System;
 using System.Collections.Generic;
 
 namespace SurfsUp.SurfsUp.SwellAssessment
@@ -11,6 +12,6 @@ namespace SurfsUp.SurfsUp.SwellAssessment
 
     public interface IEvaluator
     {
-        ISet<string> Evaluate(SwellData swellData, Strategy strategy);
+        ISet<DateTime> Evaluate(SwellData swellData, Strategy strategy);
     }
 }

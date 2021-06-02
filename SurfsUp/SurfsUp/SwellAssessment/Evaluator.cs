@@ -1,5 +1,6 @@
 ﻿using SurfsUp.DataProvider.Models;
 using SurfsUp.SurfsUp.SwellAssessment.Strategies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace SurfsUp.SurfsUp.SwellAssessment
             _strategies = strategies;
         }
 
-        public ISet<string> Evaluate(SwellData swellData, Strategy strategy)
+        public ISet<DateTime> Evaluate(SwellData swellData, Strategy strategy)
         {
             return _strategies.FirstOrDefault(s => s.Strategy == strategy)?.Assess(swellData);
         }

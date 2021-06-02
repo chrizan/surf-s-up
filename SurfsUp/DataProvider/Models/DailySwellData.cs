@@ -11,6 +11,6 @@ namespace SurfsUp.DataProvider.Models
 
         private DailySwellData(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

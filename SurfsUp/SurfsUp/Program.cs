@@ -13,7 +13,7 @@ using System;
 
 namespace SurfsUp.SurfsUp
 {
-    public class Program
+    public static class Program
     {
         private static IConfiguration Configuration { get; set; }
 
@@ -49,7 +49,7 @@ namespace SurfsUp.SurfsUp
                             .WithIdentity("Cron Trigger")
                             .ForJob(jobKey)
                             .StartAt(DateBuilder.EvenSecondDate(DateTimeOffset.UtcNow.AddSeconds(3)))
-                            .WithCronSchedule("0/3 * * * * ?")
+                            .WithCronSchedule("0/20 * * * * ?")
                             .WithDescription("my awesome cron trigger")
                         );
                     });

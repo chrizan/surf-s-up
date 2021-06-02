@@ -2,6 +2,7 @@
 using SurfsUp.DataProvider.Contract;
 using SurfsUp.DataProvider.Data;
 using SurfsUp.DataProvider.Models;
+using System;
 using Xunit;
 
 namespace SurfsUp.DataProvider.Tests.Data
@@ -33,7 +34,6 @@ namespace SurfsUp.DataProvider.Tests.Data
 
         private void AssertDailySwellData(int day, DailySwellData dailySwellData)
         {
-            dailySwellData.Date.Should().NotBeNullOrEmpty();
             dailySwellData.Count.Should().Be(8);
 
             for (int forecastHour = 1; forecastHour <= dailySwellData.Count; forecastHour++)
@@ -44,7 +44,7 @@ namespace SurfsUp.DataProvider.Tests.Data
                 switch (day)
                 {
                     case 1:
-                        dailySwellData.Date.Should().BeEquivalentTo("Thursday1911");
+                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 19));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
@@ -101,7 +101,7 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 2:
-                        dailySwellData.Date.Should().BeEquivalentTo("Friday2011");
+                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 20));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
@@ -158,7 +158,7 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 3:
-                        dailySwellData.Date.Should().BeEquivalentTo("Saturday2111");
+                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 21));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
@@ -215,7 +215,7 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 4:
-                        dailySwellData.Date.Should().BeEquivalentTo("Sunday2211");
+                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 22));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
@@ -272,7 +272,7 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 5:
-                        dailySwellData.Date.Should().BeEquivalentTo("Monday2311");
+                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 23));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
@@ -329,7 +329,7 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 6:
-                        dailySwellData.Date.Should().BeEquivalentTo("Tuesday2411");
+                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 24));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
@@ -386,7 +386,7 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 7:
-                        dailySwellData.Date.Should().BeEquivalentTo("Wednesday2511");
+                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 25));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:

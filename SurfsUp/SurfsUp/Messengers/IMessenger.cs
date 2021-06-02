@@ -5,6 +5,6 @@ namespace SurfsUp.SurfsUp.Messengers
 {
     public interface IMessenger
     {
-        Task SendMessage(string spotName, string spotUrl, ISet<string> dates); 
+        Task SendMessage(List<Message> messages); 
     }
 }

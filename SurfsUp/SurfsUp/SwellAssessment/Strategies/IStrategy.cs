@@ -1,4 +1,5 @@
 ﻿using SurfsUp.DataProvider.Models;
+using System;
 using System.Collections.Generic;
 
 namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
@@ -7,6 +8,6 @@ namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
     {
         Strategy Strategy { get; }
 
-        ISet<string> Assess(SwellData swellData);
+        ISet<DateTime> Assess(SwellData swellData);
     }
 }

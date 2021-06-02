@@ -4,6 +4,7 @@ using SurfsUp.DataProvider.Contract;
 using SurfsUp.DataProvider.Models;
 using SurfsUp.SurfsUp.Messengers;
 using SurfsUp.SurfsUp.SwellAssessment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,11 +28,13 @@ namespace SurfsUp.SurfsUp.Jobs
 
         public async Task Execute(IJobExecutionContext context)
         {
-            await CheckItalianSpots();
-            await CheckFrenchSpots();
+            List<Message> messages = new();
+            await CheckItalianSpots(messages);
+            await CheckFrenchSpots(messages);
+            await _messenger.SendMessage(messages);
         }
 
-        private async Task CheckItalianSpots()
+        private async Task CheckItalianSpots(List<Message> messages)
         {
             var spotsItaly = _configuration.GetSection("MswSpotsItaly").GetChildren().ToDictionary(s => s.Key, s => s.Value);
             foreach (var spot in spotsItaly)
@@ -39,15 +42,15 @@ namespace SurfsUp.SurfsUp.Jobs
                 string spotName = spot.Key;
                 string spotUrl = spot.Value;
                 SwellData data = await _dataProvider.GetSwellDataFromWeb(spotUrl);
-                ISet<string> dates = _evaluator.Evaluate(data, Strategy.Italy);
+                ISet<DateTime> dates = _evaluator.Evaluate(data, Strategy.Italy);
                 if (dates.Count != 0)
                 {
-                    await _messenger.SendMessage(spotName, spotUrl, dates);
+                    messages.Add(new Message() { Dates = dates, SpotName = spotName, SpotUrl = spotUrl });
                 }
             }
         }
 
-        private async Task CheckFrenchSpots()
+        private async Task CheckFrenchSpots(List<Message> messages)
         {
             var spotsFrance = _configuration.GetSection("MswSpotsFrance").GetChildren().ToDictionary(s => s.Key, s => s.Value);
             foreach (var spot in spotsFrance)
@@ -55,10 +58,10 @@ namespace SurfsUp.SurfsUp.Jobs
                 string spotName = spot.Key;
                 string spotUrl = spot.Value;
                 SwellData data = await _dataProvider.GetSwellDataFromWeb(spotUrl);
-                ISet<string> dates = _evaluator.Evaluate(data, Strategy.France);
+                ISet<DateTime> dates = _evaluator.Evaluate(data, Strategy.France);
                 if (dates.Count != 0)
                 {
-                    await _messenger.SendMessage(spotName, spotUrl, dates);
+                    messages.Add(new Message() { Dates = dates, SpotName = spotName, SpotUrl = spotUrl });
                 }
             }
         }

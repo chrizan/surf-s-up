@@ -1,4 +1,5 @@
 ﻿using SurfsUp.DataProvider.Models;
+using System;
 using System.Collections.Generic;
 
 namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
@@ -7,20 +8,17 @@ namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
     {
         public Strategy Strategy => Strategy.Italy;
 
-        public ISet<string> Assess(SwellData swellData)
+        public ISet<DateTime> Assess(SwellData swellData)
         {
-            ISet<string> swellDates = new HashSet<string>();
+            ISet<DateTime> swellDates = new HashSet<DateTime>();
 
             foreach (var day in swellData)
             {
                 foreach (var hour in day.Value)
                 {
-                    if (HasDaylight(hour.Key))
+                    if (HasDaylight(hour.Key) && hour.Value.EmptyStars <= 4)
                     {
-                        if(hour.Value.EmptyStars <= 4)
-                        {
-                            swellDates.Add(day.Value.Date);
-                        }
+                        swellDates.Add(day.Value.Date);
                     }
                 }
             }

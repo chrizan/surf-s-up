@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using SurfsUp.DataProvider.Contract;
 using SurfsUp.DataProvider.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,9 +47,10 @@ namespace SurfsUp.DataProvider.Data
 
         private DailySwellData GetDailySwellData(IEnumerable<HtmlNode> dayNodes)
         {
+            string unixTimeStamp = dayNodes.FirstOrDefault()?.GetAttributeValue("data-timestamp", "0");
             DailySwellData dailySwellData = new DailySwellData()
             {
-                Date = dayNodes.FirstOrDefault().GetAttributeValue("data-date-anchor", "Date not found")
+                Date = DateTimeOffset.FromUnixTimeSeconds(long.Parse(unixTimeStamp)).DateTime.ToLocalTime()
             };
 
             for (int dayNode = 1; dayNode <= dayNodes.Count(); dayNode++)
