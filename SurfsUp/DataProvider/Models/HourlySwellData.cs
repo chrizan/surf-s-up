@@ -1,9 +1,12 @@
-﻿namespace SurfsUp.DataProvider.Models
+﻿using System;
+
+namespace SurfsUp.DataProvider.Models
 {
     public class HourlySwellData
     {
         public int FullStars { get; set; }
         public int BlurredStars { get; set; }
         public int EmptyStars { get; set; }
+        public DateTime Timestamp {get; set;}
     }
 }

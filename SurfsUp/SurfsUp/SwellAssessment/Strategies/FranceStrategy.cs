@@ -18,7 +18,7 @@ namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
                 {
                     if (HasDaylight(hour.Key) && hour.Value.FullStars >= 3)
                     {
-                        swellDates.Add(day.Value.Date);
+                        swellDates.Add(hour.Value.Timestamp);
                     }
                 }
             }

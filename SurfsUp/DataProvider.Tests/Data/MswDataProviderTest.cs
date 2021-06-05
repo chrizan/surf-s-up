@@ -44,55 +44,62 @@ namespace SurfsUp.DataProvider.Tests.Data
                 switch (day)
                 {
                     case 1:
-                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 19));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 19));
                                 break;
 
                             case (int)ForecastHour.Hour_3am:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 19, 03, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6am:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(1);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 19, 06, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9am:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(2);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 19, 09, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_Noon:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(2);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 19, 12, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_3pm:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(1);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 19, 15, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6pm:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(1);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 19, 18, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9pm:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 19, 21, 00, 00));
                                 break;
 
                             default:
@@ -101,55 +108,62 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 2:
-                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 20));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 20));
                                 break;
 
                             case (int)ForecastHour.Hour_3am:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 20, 03, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6am:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 20, 06, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9am:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 20, 09, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_Noon:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 20, 12, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_3pm:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 20, 15, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6pm:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 20, 18, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9pm:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 20, 21, 00, 00));
                                 break;
 
                             default:
@@ -158,55 +172,62 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 3:
-                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 21));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(3);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 21));
                                 break;
 
                             case (int)ForecastHour.Hour_3am:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(3);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 21, 03, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6am:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(3);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 21, 06, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9am:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 21, 09, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_Noon:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 21, 12, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_3pm:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 21, 15, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6pm:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 21, 18, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9pm:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 21, 21, 00, 00));
                                 break;
 
                             default:
@@ -215,55 +236,62 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 4:
-                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 22));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 22));
                                 break;
 
                             case (int)ForecastHour.Hour_3am:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 22, 03, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6am:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 22, 06, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9am:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 22, 09, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_Noon:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 22, 12, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_3pm:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 22, 15, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6pm:
                                 hourlySwellData.FullStars.Should().Be(5);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 22, 18, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9pm:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 22, 21, 00, 00));
                                 break;
 
                             default:
@@ -272,55 +300,62 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 5:
-                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 23));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 23));
                                 break;
 
                             case (int)ForecastHour.Hour_3am:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(2);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 23, 03, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6am:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(2);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 23, 06, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9am:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(1);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 23, 09, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_Noon:
                                 hourlySwellData.FullStars.Should().Be(1);
                                 hourlySwellData.BlurredStars.Should().Be(2);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 23, 12, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_3pm:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(1);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 23, 15, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6pm:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(1);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 23, 18, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9pm:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 23, 21, 00, 00));
                                 break;
 
                             default:
@@ -329,55 +364,62 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 6:
-                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 24));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 24));
                                 break;
 
                             case (int)ForecastHour.Hour_3am:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 24, 03, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6am:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 24, 06, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9am:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 24, 09, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_Noon:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(3);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 24, 12, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_3pm:
                                 hourlySwellData.FullStars.Should().Be(0);
                                 hourlySwellData.BlurredStars.Should().Be(2);
                                 hourlySwellData.EmptyStars.Should().Be(3);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 24, 15, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6pm:
                                 hourlySwellData.FullStars.Should().Be(0);
                                 hourlySwellData.BlurredStars.Should().Be(2);
                                 hourlySwellData.EmptyStars.Should().Be(3);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 24, 18, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9pm:
                                 hourlySwellData.FullStars.Should().Be(1);
                                 hourlySwellData.BlurredStars.Should().Be(1);
                                 hourlySwellData.EmptyStars.Should().Be(3);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 24, 21, 00, 00));
                                 break;
 
                             default:
@@ -386,55 +428,62 @@ namespace SurfsUp.DataProvider.Tests.Data
                         break;
 
                     case 7:
-                        dailySwellData.Date.Should().Be(new DateTime(2020, 11, 25));
                         switch (forecastHour)
                         {
                             case (int)ForecastHour.Hour_12am:
                                 hourlySwellData.FullStars.Should().Be(3);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(2);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 25));
                                 break;
 
                             case (int)ForecastHour.Hour_3am:
                                 hourlySwellData.FullStars.Should().Be(4);
                                 hourlySwellData.BlurredStars.Should().Be(0);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 25, 03, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6am:
                                 hourlySwellData.FullStars.Should().Be(0);
                                 hourlySwellData.BlurredStars.Should().Be(4);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 25, 06, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9am:
                                 hourlySwellData.FullStars.Should().Be(0);
                                 hourlySwellData.BlurredStars.Should().Be(4);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 25, 09, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_Noon:
                                 hourlySwellData.FullStars.Should().Be(0);
                                 hourlySwellData.BlurredStars.Should().Be(4);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 25, 12, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_3pm:
                                 hourlySwellData.FullStars.Should().Be(0);
                                 hourlySwellData.BlurredStars.Should().Be(4);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 25, 15, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_6pm:
                                 hourlySwellData.FullStars.Should().Be(2);
                                 hourlySwellData.BlurredStars.Should().Be(2);
                                 hourlySwellData.EmptyStars.Should().Be(1);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 25, 18, 00, 00));
                                 break;
 
                             case (int)ForecastHour.Hour_9pm:
                                 hourlySwellData.FullStars.Should().Be(1);
                                 hourlySwellData.BlurredStars.Should().Be(4);
                                 hourlySwellData.EmptyStars.Should().Be(0);
+                                hourlySwellData.Timestamp.Should().Be(new DateTime(2020, 11, 25, 21, 00, 00));
                                 break;
 
                             default:

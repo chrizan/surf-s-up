@@ -13,23 +13,28 @@ namespace SurfsUp.DataProvider.Data
     /// </summary>
     public class MswDataProvider : IDataProvider
     {
+        private const string _xPathToTimezoneElement = "/html/body/div[1]/div/div[2]/div/div[2]/div[2]/div[2]/div/div/div[1]/div/header/h3/div[2]/span";
+        private long _utcTimeZone = 0;
+
         public SwellData GetSwellDataFromFile(string filePath)
         {
-            HtmlDocument htmlDoc = new HtmlDocument();
+            HtmlDocument htmlDoc = new();
             htmlDoc.Load(filePath);
+            _utcTimeZone = long.Parse(htmlDoc.DocumentNode.SelectSingleNode(_xPathToTimezoneElement).GetAttributeValue("data-timezone", "0"));
             return GetSwellData(htmlDoc);
         }
 
         public async Task<SwellData> GetSwellDataFromWeb(string spotUrl)
         {
-            HtmlWeb web = new HtmlWeb();
+            HtmlWeb web = new();
             HtmlDocument htmlDoc = await web.LoadFromWebAsync(spotUrl);
+            _utcTimeZone = int.Parse(htmlDoc.DocumentNode.SelectSingleNode(_xPathToTimezoneElement).GetAttributeValue("data-timezone", "0"));
             return GetSwellData(htmlDoc);
         }
 
         private SwellData GetSwellData(HtmlDocument htmlDoc)
         {
-            SwellData swellData = new SwellData();
+            SwellData swellData = new();
 
             int forecastDay = 1;
             IEnumerable<HtmlNode> dayNodes = htmlDoc.DocumentNode.Descendants("tr").Where(tr => tr.GetAttributeValue("data-forecast-day", "-1") == forecastDay.ToString());
@@ -47,12 +52,7 @@ namespace SurfsUp.DataProvider.Data
 
         private DailySwellData GetDailySwellData(IEnumerable<HtmlNode> dayNodes)
         {
-            string unixTimeStamp = dayNodes.FirstOrDefault()?.GetAttributeValue("data-timestamp", "0");
-            DailySwellData dailySwellData = new DailySwellData()
-            {
-                Date = DateTimeOffset.FromUnixTimeSeconds(long.Parse(unixTimeStamp)).DateTime.ToLocalTime()
-            };
-
+            DailySwellData dailySwellData = new();
             for (int dayNode = 1; dayNode <= dayNodes.Count(); dayNode++)
             {
                 dailySwellData.Add((ForecastHour)dayNode, GetHourlySwellData(dayNodes.ElementAt(dayNode - 1)));
@@ -62,7 +62,11 @@ namespace SurfsUp.DataProvider.Data
 
         private HourlySwellData GetHourlySwellData(HtmlNode dayNode)
         {
-            HourlySwellData hourlySwellData = new HourlySwellData();
+            long unixTimeStamp = long.Parse(dayNode.GetAttributeValue("data-timestamp", "0"));
+            HourlySwellData hourlySwellData = new() 
+            {
+                Timestamp = DateTimeOffset.FromUnixTimeSeconds(unixTimeStamp + _utcTimeZone).DateTime
+            };
 
             var listNodes = dayNode.Descendants("li");
 
