@@ -8,9 +8,9 @@ namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
     {
         public Strategy Strategy => Strategy.France;
 
-        public ISet<DateTime> Assess(SwellData swellData)
+        public ISet<DayOfWeek> Assess(SwellData swellData)
         {
-            ISet<DateTime> swellDates = new HashSet<DateTime>();
+            ISet<DayOfWeek> swellDates = new HashSet<DayOfWeek>();
 
             foreach (var day in swellData)
             {
@@ -18,7 +18,7 @@ namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
                 {
                     if (HasDaylight(hour.Key) && hour.Value.FullStars >= 3)
                     {
-                        swellDates.Add(hour.Value.Timestamp);
+                        swellDates.Add(hour.Value.Timestamp.DayOfWeek);
                     }
                 }
             }

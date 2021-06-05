@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
 {
-    public class ItalyStrategy : BaseStrategy, IStrategy
+    public class SpainStrategy : BaseStrategy, IStrategy
     {
-        public Strategy Strategy => Strategy.Italy;
+        public Strategy Strategy => Strategy.Spain;
 
         public ISet<DayOfWeek> Assess(SwellData swellData)
         {
@@ -16,7 +16,7 @@ namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
             {
                 foreach (var hour in day.Value)
                 {
-                    if (HasDaylight(hour.Key) && hour.Value.EmptyStars <= 4)
+                    if (HasDaylight(hour.Key) && hour.Value.FullStars >= 3)
                     {
                         swellDates.Add(hour.Value.Timestamp.DayOfWeek);
                     }

@@ -7,11 +7,12 @@ namespace SurfsUp.SurfsUp.SwellAssessment
     public enum Strategy
     {
         Italy,
-        France
+        France,
+        Spain
     }
 
     public interface IEvaluator
     {
-        ISet<DateTime> Evaluate(SwellData swellData, Strategy strategy);
+        ISet<DayOfWeek> Evaluate(SwellData swellData, Strategy strategy);
     }
 }

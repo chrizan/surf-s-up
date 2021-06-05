@@ -41,6 +41,7 @@ namespace SurfsUp.SurfsUp
                         services.AddTransient<IEvaluator, Evaluator>();
                         services.AddTransient<IStrategy, ItalyStrategy>();
                         services.AddTransient<IStrategy, FranceStrategy>();
+                        services.AddTransient<IStrategy, SpainStrategy>();
 
                         var jobKey = new JobKey("jobKeyName", "jobKeyGroup");
                         q.AddJob<Job>(jobKey, j => j.WithDescription("my awesome job"));
@@ -49,7 +50,7 @@ namespace SurfsUp.SurfsUp
                             .WithIdentity("Cron Trigger")
                             .ForJob(jobKey)
                             .StartAt(DateBuilder.EvenSecondDate(DateTimeOffset.UtcNow.AddSeconds(3)))
-                            .WithCronSchedule("0/20 * * * * ?")
+                            .WithCronSchedule("* * 8 * * ?")
                             .WithDescription("my awesome cron trigger")
                         );
                     });

@@ -15,7 +15,7 @@ namespace SurfsUp.SurfsUp.SwellAssessment
             _strategies = strategies;
         }
 
-        public ISet<DateTime> Evaluate(SwellData swellData, Strategy strategy)
+        public ISet<DayOfWeek> Evaluate(SwellData swellData, Strategy strategy)
         {
             return _strategies.FirstOrDefault(s => s.Strategy == strategy)?.Assess(swellData);
         }

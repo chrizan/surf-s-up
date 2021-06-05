@@ -29,8 +29,9 @@ namespace SurfsUp.SurfsUp.Jobs
         public async Task Execute(IJobExecutionContext context)
         {
             List<Message> messages = new();
-            await CheckItalianSpots(messages);
             await CheckFrenchSpots(messages);
+            await CheckItalianSpots(messages);
+            await CheckSpanishSpots(messages);
             await _messenger.SendMessage(messages);
         }
 
@@ -42,7 +43,7 @@ namespace SurfsUp.SurfsUp.Jobs
                 string spotName = spot.Key;
                 string spotUrl = spot.Value;
                 SwellData data = await _dataProvider.GetSwellDataFromWeb(spotUrl);
-                ISet<DateTime> dates = _evaluator.Evaluate(data, Strategy.Italy);
+                ISet<DayOfWeek> dates = _evaluator.Evaluate(data, Strategy.Italy);
                 if (dates.Count != 0)
                 {
                     messages.Add(new Message() { Dates = dates, SpotName = spotName, SpotUrl = spotUrl });
@@ -58,7 +59,23 @@ namespace SurfsUp.SurfsUp.Jobs
                 string spotName = spot.Key;
                 string spotUrl = spot.Value;
                 SwellData data = await _dataProvider.GetSwellDataFromWeb(spotUrl);
-                ISet<DateTime> dates = _evaluator.Evaluate(data, Strategy.France);
+                ISet<DayOfWeek> dates = _evaluator.Evaluate(data, Strategy.France);
+                if (dates.Count != 0)
+                {
+                    messages.Add(new Message() { Dates = dates, SpotName = spotName, SpotUrl = spotUrl });
+                }
+            }
+        }
+
+        private async Task CheckSpanishSpots(List<Message> messages)
+        {
+            var spotsSpain = _configuration.GetSection("MswSpotsSpain").GetChildren().ToDictionary(s => s.Key, s => s.Value);
+            foreach (var spot in spotsSpain)
+            {
+                string spotName = spot.Key;
+                string spotUrl = spot.Value;
+                SwellData data = await _dataProvider.GetSwellDataFromWeb(spotUrl);
+                ISet<DayOfWeek> dates = _evaluator.Evaluate(data, Strategy.Spain);
                 if (dates.Count != 0)
                 {
                     messages.Add(new Message() { Dates = dates, SpotName = spotName, SpotUrl = spotUrl });

@@ -8,6 +8,6 @@ namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
     {
         Strategy Strategy { get; }
 
-        ISet<DateTime> Assess(SwellData swellData);
+        ISet<DayOfWeek> Assess(SwellData swellData);
     }
 }
