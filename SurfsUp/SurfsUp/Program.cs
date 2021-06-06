@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Quartz;
@@ -9,17 +8,13 @@ using SurfsUp.SurfsUp.Jobs;
 using SurfsUp.SurfsUp.Messengers;
 using SurfsUp.SurfsUp.SwellAssessment;
 using SurfsUp.SurfsUp.SwellAssessment.Strategies;
-using System;
 
 namespace SurfsUp.SurfsUp
 {
     public static class Program
     {
-        private static IConfiguration Configuration { get; set; }
-
         public static void Main(string[] args)
         {
-            Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -31,11 +26,9 @@ namespace SurfsUp.SurfsUp
                 })
                 .ConfigureServices(services =>
                 {
-                    //services.Configure<QuartzOptions>(Configuration.GetSection("Quartz"));
-
-                    services.AddQuartz(q =>
+                    services.AddQuartz(quartz =>
                     {
-                        q.UseMicrosoftDependencyInjectionJobFactory();
+                        quartz.UseMicrosoftDependencyInjectionJobFactory();
                         services.AddTransient<IDataProvider, MswDataProvider>();
                         services.AddTransient<IMessenger, MailMessenger>();
                         services.AddTransient<IEvaluator, Evaluator>();
@@ -43,15 +36,13 @@ namespace SurfsUp.SurfsUp
                         services.AddTransient<IStrategy, FranceStrategy>();
                         services.AddTransient<IStrategy, SpainStrategy>();
 
-                        var jobKey = new JobKey("jobKeyName", "jobKeyGroup");
-                        q.AddJob<Job>(jobKey, j => j.WithDescription("my awesome job"));
+                        var jobKey = new JobKey("daily0700");
+                        quartz.AddJob<Job>(jobKey, j => j.WithDescription("Check Magic Seaweed"));
 
-                        q.AddTrigger(t => t
+                        quartz.AddTrigger(trigger => trigger
                             .WithIdentity("Cron Trigger")
+                            .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(7, 0))
                             .ForJob(jobKey)
-                            .StartAt(DateBuilder.EvenSecondDate(DateTimeOffset.UtcNow.AddSeconds(3)))
-                            .WithCronSchedule("* * 8 * * ?")
-                            .WithDescription("my awesome cron trigger")
                         );
                     });
 
