@@ -13,14 +13,14 @@ namespace SurfsUp.DataProvider.Data
     /// </summary>
     public class MswDataProvider : IMswDataProvider
     {
-        private const string _xPathToTimezoneElement = "/html/body/div[1]/div/div[2]/div/div[2]/div[2]/div[2]/div/div/div[1]/div/header/h3/div[2]/span";
+        private const string XpathToTimezoneElement = "/html/body/div[1]/div/div[2]/div/div[2]/div[2]/div[2]/div/div/div[1]/div/header/h3/div[2]/span";
         private long _utcTimeZone = 0;
 
         public SwellData GetSwellDataFromFile(string filePath)
         {
             HtmlDocument htmlDoc = new();
             htmlDoc.Load(filePath);
-            _utcTimeZone = long.Parse(htmlDoc.DocumentNode.SelectSingleNode(_xPathToTimezoneElement).GetAttributeValue("data-timezone", "0"));
+            _utcTimeZone = long.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathToTimezoneElement).GetAttributeValue("data-timezone", "0"));
             return GetSwellData(htmlDoc);
         }
 
@@ -28,7 +28,7 @@ namespace SurfsUp.DataProvider.Data
         {
             HtmlWeb web = new();
             HtmlDocument htmlDoc = await web.LoadFromWebAsync(spotUrl);
-            _utcTimeZone = int.Parse(htmlDoc.DocumentNode.SelectSingleNode(_xPathToTimezoneElement).GetAttributeValue("data-timezone", "0"));
+            _utcTimeZone = int.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathToTimezoneElement).GetAttributeValue("data-timezone", "0"));
             return GetSwellData(htmlDoc);
         }
 
