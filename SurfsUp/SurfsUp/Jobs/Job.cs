@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Quartz;
-using SurfsUp.DataProvider.Contract;
+using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Models;
 using SurfsUp.SurfsUp.Messengers;
 using SurfsUp.SurfsUp.SwellAssessment;
@@ -14,13 +14,13 @@ namespace SurfsUp.SurfsUp.Jobs
     public class Job : IJob
     {
         private readonly IConfiguration _configuration;
-        private readonly IDataProvider _dataProvider;
+        private readonly IMswDataProvider _mswDataProvider;
         private readonly IMessenger _messenger;
         private readonly IEvaluator _evaluator;
 
-        public Job(IConfiguration configuration, IDataProvider dataProvider, IMessenger messenger, IEvaluator evaluator)
+        public Job(IConfiguration configuration, IMswDataProvider mswDataProvider, IMessenger messenger, IEvaluator evaluator)
         {
-            _dataProvider = dataProvider;
+            _mswDataProvider = mswDataProvider;
             _messenger = messenger;
             _configuration = configuration;
             _evaluator = evaluator;
@@ -42,7 +42,7 @@ namespace SurfsUp.SurfsUp.Jobs
             {
                 string spotName = spot.Key;
                 string spotUrl = spot.Value;
-                SwellData data = await _dataProvider.GetSwellDataFromWeb(spotUrl);
+                SwellData data = await _mswDataProvider.GetSwellDataFromWeb(spotUrl);
                 ISet<DayOfWeek> dates = _evaluator.Evaluate(data, Strategy.Italy);
                 if (dates.Count != 0)
                 {
@@ -58,7 +58,7 @@ namespace SurfsUp.SurfsUp.Jobs
             {
                 string spotName = spot.Key;
                 string spotUrl = spot.Value;
-                SwellData data = await _dataProvider.GetSwellDataFromWeb(spotUrl);
+                SwellData data = await _mswDataProvider.GetSwellDataFromWeb(spotUrl);
                 ISet<DayOfWeek> dates = _evaluator.Evaluate(data, Strategy.France);
                 if (dates.Count != 0)
                 {
@@ -74,7 +74,7 @@ namespace SurfsUp.SurfsUp.Jobs
             {
                 string spotName = spot.Key;
                 string spotUrl = spot.Value;
-                SwellData data = await _dataProvider.GetSwellDataFromWeb(spotUrl);
+                SwellData data = await _mswDataProvider.GetSwellDataFromWeb(spotUrl);
                 ISet<DayOfWeek> dates = _evaluator.Evaluate(data, Strategy.Spain);
                 if (dates.Count != 0)
                 {

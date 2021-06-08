@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using SurfsUp.DataProvider.Contract;
+using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace SurfsUp.DataProvider.Data
     /// <summary>
     /// Magic seaweed screen scraping implementation of IDataProvider 
     /// </summary>
-    public class MswDataProvider : IDataProvider
+    public class MswDataProvider : IMswDataProvider
     {
         private const string _xPathToTimezoneElement = "/html/body/div[1]/div/div[2]/div/div[2]/div[2]/div[2]/div/div/div[1]/div/header/h3/div[2]/span";
         private long _utcTimeZone = 0;

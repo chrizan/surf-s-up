@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Quartz;
-using SurfsUp.DataProvider.Contract;
+using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Data;
 using SurfsUp.SurfsUp.Jobs;
 using SurfsUp.SurfsUp.Messengers;
@@ -29,7 +29,7 @@ namespace SurfsUp.SurfsUp
                     services.AddQuartz(quartz =>
                     {
                         quartz.UseMicrosoftDependencyInjectionJobFactory();
-                        services.AddTransient<IDataProvider, MswDataProvider>();
+                        services.AddTransient<IMswDataProvider, MswDataProvider>();
                         services.AddTransient<IMessenger, MailMessenger>();
                         services.AddTransient<IEvaluator, Evaluator>();
                         services.AddTransient<IStrategy, ItalyStrategy>();

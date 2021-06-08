@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using SurfsUp.DataProvider.Contract;
+using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Data;
 using SurfsUp.DataProvider.Models;
 using System;
@@ -15,7 +15,7 @@ namespace SurfsUp.DataProvider.Tests.Data
         public void Test_GetSwellDataFromFile_VieuxBoucau()
         {
             // Arrange
-            IDataProvider mswDataProvider = new MswDataProvider();
+            IMswDataProvider mswDataProvider = new MswDataProvider();
 
             // Act
             SwellData swellData = mswDataProvider.GetSwellDataFromFile(MswVieuxBoucauForecast);
