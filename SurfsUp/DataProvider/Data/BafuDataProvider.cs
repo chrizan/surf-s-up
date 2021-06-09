@@ -7,9 +7,8 @@ namespace SurfsUp.DataProvider.Data
 {
     public class BafuDataProvider : IBafuDataProvider
     {
-        private const string XpathOutflow = "/html/body/div/div/div[3]/table/tbody/tr[1]/td[1]";
-
-        private const string XPathTemperature = "/html/body/div/div/div[3]/table/tbody/tr[1]/td[3]";
+        private const string XpathOutflow = "//body/div/div/div[3]/table/tbody/tr[1]/td[1]";
+        private const string XPathTemperature = "//body/div/div/div[3]/table/tbody/tr[1]/td[3]";
 
         public async Task<BafuData> GetOutflowData(string bafuUrl)
         {
