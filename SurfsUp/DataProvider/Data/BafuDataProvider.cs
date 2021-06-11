@@ -7,7 +7,8 @@ namespace SurfsUp.DataProvider.Data
 {
     public class BafuDataProvider : IBafuDataProvider
     {
-        private const string XpathOutflow = "//body/div/div/div[3]/table/tbody/tr[1]/td[1]";
+        private const string XpathOutflowCurrent = "//body/div/div/div[3]/table/tbody/tr[1]/td[1]";
+        private const string XpathOutflowMax24hours = "//body/div/div/div[3]/table/tbody/tr[3]/td[1]";
         private const string XPathTemperature = "//body/div/div/div[3]/table/tbody/tr[1]/td[3]";
 
         public async Task<BafuData> GetOutflowData(string bafuUrl)
@@ -21,7 +22,8 @@ namespace SurfsUp.DataProvider.Data
         {
             BafuData bafuData = new()
             {
-                Outflow = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathOutflow).InnerText),
+                OutflowCurrent = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathOutflowCurrent).InnerText),
+                OutflowMax24hours = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathOutflowMax24hours).InnerText),
                 DegreeCelsius = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XPathTemperature).InnerText)
             };
             return bafuData;
