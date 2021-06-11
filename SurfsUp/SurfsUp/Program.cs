@@ -6,8 +6,10 @@ using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Data;
 using SurfsUp.SurfsUp.Jobs;
 using SurfsUp.SurfsUp.Messengers;
-using SurfsUp.SurfsUp.SwellAssessment;
-using SurfsUp.SurfsUp.SwellAssessment.Strategies;
+using SurfsUp.SurfsUp.SwellAssessment.Bafu;
+using SurfsUp.SurfsUp.SwellAssessment.Msw;
+using SurfsUp.SurfsUp.SwellAssessment.Strategies.Bafu;
+using SurfsUp.SurfsUp.SwellAssessment.Strategies.Msw;
 
 namespace SurfsUp.SurfsUp
 {
@@ -30,11 +32,16 @@ namespace SurfsUp.SurfsUp
                     {
                         quartz.UseMicrosoftDependencyInjectionJobFactory();
                         services.AddTransient<IMswDataProvider, MswDataProvider>();
+                        services.AddTransient<IMswEvaluator, MswEvaluator>();
+                        services.AddTransient<IMswStrategy, ItalyStrategy>();
+                        services.AddTransient<IMswStrategy, FranceStrategy>();
+                        services.AddTransient<IMswStrategy, SpainStrategy>();
+                        services.AddTransient<IBafuDataProvider, BafuDataProvider>();
+                        services.AddTransient<IBafuEvaluator, BafuEvaluator>();
+                        services.AddTransient<IBafuStrategy, ReussStrategy>();
+                        services.AddTransient<IBafuStrategy, BirsStrategy>();
+                        services.AddTransient<IBafuStrategy, ThurStrategy>();
                         services.AddTransient<IMessenger, MailMessenger>();
-                        services.AddTransient<IEvaluator, Evaluator>();
-                        services.AddTransient<IStrategy, ItalyStrategy>();
-                        services.AddTransient<IStrategy, FranceStrategy>();
-                        services.AddTransient<IStrategy, SpainStrategy>();
 
                         var jobKey = new JobKey("daily0700");
                         quartz.AddJob<Job>(jobKey, j => j.WithDescription("Check Magic Seaweed"));

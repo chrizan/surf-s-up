@@ -5,6 +5,6 @@ namespace SurfsUp.DataProvider.Contracts
 {
     public interface IBafuDataProvider
     {
-        Task<BafuData> GetOutflowData(string bafuUrl);
+        Task<BafuData> GetOutflowData(string spotUrl);
     }
 }

@@ -1,8 +1,8 @@
 ﻿using SurfsUp.DataProvider.Models;
 
-namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
+namespace SurfsUp.SurfsUp.SwellAssessment.Strategies.Msw
 {
-    public abstract class BaseStrategy
+    public abstract class MswBaseStrategy
     {
         protected bool HasDaylight(ForecastHour hour)
         {

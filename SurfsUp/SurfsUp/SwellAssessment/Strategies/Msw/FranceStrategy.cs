@@ -1,12 +1,13 @@
 ﻿using SurfsUp.DataProvider.Models;
+using SurfsUp.SurfsUp.SwellAssessment.Msw;
 using System;
 using System.Collections.Generic;
 
-namespace SurfsUp.SurfsUp.SwellAssessment.Strategies
+namespace SurfsUp.SurfsUp.SwellAssessment.Strategies.Msw
 {
-    public class SpainStrategy : BaseStrategy, IStrategy
+    public class FranceStrategy : MswBaseStrategy, IMswStrategy
     {
-        public Strategy Strategy => Strategy.Spain;
+        public MswStrategy MswStrategy => MswStrategy.France;
 
         public ISet<DayOfWeek> Assess(SwellData swellData)
         {

@@ -1,6 +1,8 @@
 ﻿using HtmlAgilityPack;
 using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Models;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SurfsUp.DataProvider.Data
@@ -11,10 +13,10 @@ namespace SurfsUp.DataProvider.Data
         private const string XpathOutflowMax24hours = "//body/div/div/div[3]/table/tbody/tr[3]/td[1]";
         private const string XPathTemperature = "//body/div/div/div[3]/table/tbody/tr[1]/td[3]";
 
-        public async Task<BafuData> GetOutflowData(string bafuUrl)
+        public async Task<BafuData> GetOutflowData(string spotUrl)
         {
             HtmlWeb web = new();
-            HtmlDocument htmlDoc = await web.LoadFromWebAsync(bafuUrl);
+            HtmlDocument htmlDoc = await web.LoadFromWebAsync(spotUrl);
             return GetBafuData(htmlDoc);
         }
 
@@ -24,7 +26,8 @@ namespace SurfsUp.DataProvider.Data
             {
                 OutflowCurrent = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathOutflowCurrent).InnerText),
                 OutflowMax24hours = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathOutflowMax24hours).InnerText),
-                DegreeCelsius = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XPathTemperature).InnerText)
+                DegreeCelsius = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XPathTemperature).InnerText),
+                Dates = new HashSet<DayOfWeek>() { DateTime.Today.DayOfWeek }
             };
             return bafuData;
         }
