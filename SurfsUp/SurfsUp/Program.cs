@@ -42,6 +42,7 @@ namespace SurfsUp.SurfsUp
                         services.AddTransient<IBafuStrategy, BirsStrategy>();
                         services.AddTransient<IBafuStrategy, ThurStrategy>();
                         services.AddTransient<IMessenger, MailMessenger>();
+                        services.AddTransient<IHtmlMailBuilder, HtmlMailBuilder>();
 
                         var jobKey = new JobKey("daily0700");
                         quartz.AddJob<Job>(jobKey, j => j.WithDescription("Check Magic Seaweed"));

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataProvider", "DataProvide
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataProvider.Tests", "DataProvider.Tests\DataProvider.Tests.csproj", "{5F823800-B3DF-4559-AAAC-120E4A879CDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurfsUp.Tests", "SurfsUp.Tests\SurfsUp.Tests.csproj", "{50917837-5751-40BA-ABAE-589EDFBCF90D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5F823800-B3DF-4559-AAAC-120E4A879CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F823800-B3DF-4559-AAAC-120E4A879CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F823800-B3DF-4559-AAAC-120E4A879CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50917837-5751-40BA-ABAE-589EDFBCF90D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50917837-5751-40BA-ABAE-589EDFBCF90D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50917837-5751-40BA-ABAE-589EDFBCF90D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50917837-5751-40BA-ABAE-589EDFBCF90D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

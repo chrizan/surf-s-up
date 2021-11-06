@@ -13,7 +13,7 @@ namespace SurfsUp.SurfsUp.Messengers
 
         public string GetRepresentation()
         {
-            return $"{SpotName} is firing @ {string.Join(',', Dates)}! {Environment.NewLine}Checkout {SpotUrl} ";
+            return $"{SpotName} is firing @ {string.Join(", ", Dates)}! {Environment.NewLine}Checkout {SpotUrl} ";
         }
     }
 }

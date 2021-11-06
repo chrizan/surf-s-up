@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,37 +11,33 @@ namespace SurfsUp.SurfsUp.Messengers
 {
     public class MailMessenger : IMessenger
     {
+        private readonly IHtmlMailBuilder _htmlMailBuilder;
+
         private string _from;
         private string _to;
         private string _server;
         private int _port;
         private string _password;
 
-        public MailMessenger(IConfiguration configuration)
+        public MailMessenger(IConfiguration configuration, IHtmlMailBuilder htmlMailBuilder)
         {
             ReadConfiguration(configuration);
+            _htmlMailBuilder = htmlMailBuilder;
         }
 
         public Task SendMessage(List<Message> messages)
         {
+            //Plain text message
             MailMessage mailMessage = new(_from, _to)
             {
                 Subject = $"Surf's Up!",
                 Body = $"{GetBody(messages)}"
             };
 
-            /*
-            // Construct the alternate body as HTML.
-            string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
-            body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">";
-            body += "</HEAD><BODY><DIV><FONT face=Arial color=#ff0000 size=15>Hello from SurfsUp";
-            body += "</FONT></DIV></BODY></HTML>";
-
-            // Add the alternate body to the message.
-            ContentType mimeType = new ContentType("text/html");
-            AlternateView alternate = AlternateView.CreateAlternateViewFromString(body, mimeType);
-            mailMessage.AlternateViews.Add(alternate);
-            */
+            //Html message
+            ContentType mimeType = new("text/html");
+            var alternateView = AlternateView.CreateAlternateViewFromString(_htmlMailBuilder.BuildHtmlMail(messages), mimeType);
+            mailMessage.AlternateViews.Add(alternateView);
 
             SmtpClient client = new(_server)
             {
