@@ -1,3 +1,5 @@
+using Database.Contracts;
+using Database.Service;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -40,6 +42,7 @@ namespace SurfsUp.SurfsUp
                     services.AddSingleton<IBafuStrategy, ThurStrategy>();
                     services.AddSingleton<IMessenger, MailMessenger>();
                     services.AddSingleton<IHtmlMailBuilder, HtmlMailBuilder>();
+                    services.AddSingleton<IDatabaseService, DatabaseService>();
 
                     services.AddQuartz(quartz =>
                     {
