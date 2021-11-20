@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using Database.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Database.Contracts
 {
     public interface IDatabaseService
     {
-        Task<List<string>> GetAllMswSurfSpotsAsync();
+        Task<List<MswSurfSpot>> GetAllMswSurfSpotsAsync();
 
-        Task AddMswSurfSpotAsync(string url);
+        Task AddMswSurfSpotAsync(MswSurfSpot mswSurfSpot);
 
-        Task RemoveMswSurfSpotAsync(string url);
+        Task RemoveMswSurfSpotAsync(MswSurfSpot mswSurfSpot);
 
-        Task<List<string>> GetAllBafuSurfSpotsAsync();
+        Task<List<BafuSurfSpot>> GetAllBafuSurfSpotsAsync();
 
-        Task AddBafuSurfSpotAsync(string url);
+        Task AddBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot);
 
-        Task RemoveBafuSurfSpotAsync(string url);
+        Task RemoveBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot);
     }
 }

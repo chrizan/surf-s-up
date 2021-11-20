@@ -10,7 +10,9 @@ namespace Database.Migrations
                 name: "BafuSurfSpots",
                 columns: table => new
                 {
-                    Url = table.Column<string>(type: "TEXT", nullable: false)
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Outflow = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -21,7 +23,10 @@ namespace Database.Migrations
                 name: "MswSurfSpots",
                 columns: table => new
                 {
-                    Url = table.Column<string>(type: "TEXT", nullable: false)
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    FullStars = table.Column<int>(type: "INTEGER", nullable: false),
+                    BlurredStars = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

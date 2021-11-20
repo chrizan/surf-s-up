@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(SurfsUpDbContext))]
-    [Migration("20211120165917_InitialCreate")]
+    [Migration("20211120180548_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,12 @@ namespace Database.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Outflow")
+                        .HasColumnType("REAL");
+
                     b.HasKey("Url");
 
                     b.ToTable("BafuSurfSpots");
@@ -30,6 +36,15 @@ namespace Database.Migrations
             modelBuilder.Entity("Database.Model.MswSurfSpot", b =>
                 {
                     b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("BlurredStars")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("FullStars")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Url");

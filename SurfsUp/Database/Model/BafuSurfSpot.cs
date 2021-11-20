@@ -6,5 +6,9 @@ namespace Database.Model
     {
         [Key]
         public string Url { get; set; }
+
+        public string Name { get; set; }
+
+        public double Outflow { get; set; }
     }
 }

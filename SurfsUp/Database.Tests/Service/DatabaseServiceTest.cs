@@ -1,4 +1,6 @@
+using Database.Model;
 using FluentAssertions;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -10,44 +12,44 @@ namespace Database.Service.Tests
         public async Task Test_DatabaseService_Add_And_Remove_MswSurfspot()
         {
             // Arrange
-            const string MswSpotUrl = "Msw Test Url";
+            var mswSurfSpot = new MswSurfSpot() { Url = "Msw Test Url", Name = "Msw Test Name", FullStars = 2, BlurredStars = 1 };
             var dbService = new DatabaseService();
 
             // Act
-            await dbService.AddMswSurfSpotAsync(MswSpotUrl);
-            var allSurfSpots = await dbService.GetAllMswSurfSpotsAsync();
+            await dbService.AddMswSurfSpotAsync(mswSurfSpot);
+            var allMswSurfSpots = await dbService.GetAllMswSurfSpotsAsync();
 
             // Assert
-            allSurfSpots.Should().Contain(s => s == MswSpotUrl);
+            allMswSurfSpots.Any(s => s.Url == mswSurfSpot.Url).Should().BeTrue();
 
             // Act
-            await dbService.RemoveMswSurfSpotAsync(MswSpotUrl);
-            allSurfSpots = await dbService.GetAllMswSurfSpotsAsync();
+            await dbService.RemoveMswSurfSpotAsync(mswSurfSpot);
+            allMswSurfSpots = await dbService.GetAllMswSurfSpotsAsync();
 
             // Assert
-            allSurfSpots.Should().NotContain(s => s == MswSpotUrl);
+            allMswSurfSpots.Any(s => s.Url == mswSurfSpot.Url).Should().BeFalse();
         }
 
         [Fact]
         public async Task Test_DatabaseService_Add_And_Remove_BafuSurfspot()
         {
             // Arrange
-            const string BafuSpotUrl = "Bafu Test Url";
+            var bafuSurfSpot = new BafuSurfSpot() { Url = "Bafu Test Url", Name = "Bafu Test Name", Outflow = 250 };
             var dbService = new DatabaseService();
 
             // Act
-            await dbService.AddBafuSurfSpotAsync(BafuSpotUrl);
-            var allSurfSpots = await dbService.GetAllBafuSurfSpotsAsync();
+            await dbService.AddBafuSurfSpotAsync(bafuSurfSpot);
+            var allBafuSurfSpots = await dbService.GetAllBafuSurfSpotsAsync();
 
             // Assert
-            allSurfSpots.Should().Contain(s => s == BafuSpotUrl);
+            allBafuSurfSpots.Any(s => s.Url == bafuSurfSpot.Url).Should().BeTrue();
 
             // Act
-            await dbService.RemoveBafuSurfSpotAsync(BafuSpotUrl);
-            allSurfSpots = await dbService.GetAllBafuSurfSpotsAsync();
+            await dbService.RemoveBafuSurfSpotAsync(bafuSurfSpot);
+            allBafuSurfSpots = await dbService.GetAllBafuSurfSpotsAsync();
 
             // Assert
-            allSurfSpots.Should().NotContain(s => s == BafuSpotUrl);
+            allBafuSurfSpots.Any(s => s.Url == bafuSurfSpot.Url).Should().BeFalse();
         }
     }
 }
