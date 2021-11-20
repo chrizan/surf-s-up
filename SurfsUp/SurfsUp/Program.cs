@@ -10,8 +10,6 @@ using SurfsUp.SurfsUp.Jobs;
 using SurfsUp.SurfsUp.Messengers;
 using SurfsUp.SurfsUp.SwellAssessment.Bafu;
 using SurfsUp.SurfsUp.SwellAssessment.Msw;
-using SurfsUp.SurfsUp.SwellAssessment.Strategies.Bafu;
-using SurfsUp.SurfsUp.SwellAssessment.Strategies.Msw;
 
 namespace SurfsUp.SurfsUp
 {
@@ -32,14 +30,8 @@ namespace SurfsUp.SurfsUp
                 {
                     services.AddSingleton<IMswDataProvider, MswDataProvider>();
                     services.AddSingleton<IMswEvaluator, MswEvaluator>();
-                    services.AddSingleton<IMswStrategy, ItalyStrategy>();
-                    services.AddSingleton<IMswStrategy, FranceStrategy>();
-                    services.AddSingleton<IMswStrategy, SpainStrategy>();
                     services.AddSingleton<IBafuDataProvider, BafuDataProvider>();
                     services.AddSingleton<IBafuEvaluator, BafuEvaluator>();
-                    services.AddSingleton<IBafuStrategy, ReussStrategy>();
-                    services.AddSingleton<IBafuStrategy, BirsStrategy>();
-                    services.AddSingleton<IBafuStrategy, ThurStrategy>();
                     services.AddSingleton<IMessenger, MailMessenger>();
                     services.AddSingleton<IHtmlMailBuilder, HtmlMailBuilder>();
                     services.AddSingleton<IDatabaseService, DatabaseService>();

@@ -13,6 +13,11 @@ namespace Database
 
         public SurfsUpDbContext()
         {
+            /*
+             * Environment.SpecialFolder.LocalApplicationData:
+             * Windows: User\AppData\Local
+             * Linux: home/.local/share
+             */
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
             DbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}surfsup.db";
