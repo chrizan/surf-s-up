@@ -8,7 +8,6 @@ using SurfsUp.SurfsUp.SwellAssessment.Bafu;
 using SurfsUp.SurfsUp.SwellAssessment.Msw;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SurfsUp.SurfsUp.Jobs
@@ -48,13 +47,11 @@ namespace SurfsUp.SurfsUp.Jobs
             var mswSpots = await _databaseService.GetAllMswSurfSpotsAsync();
             foreach (var mswSpot in mswSpots)
             {
-                string spotName = "";//mswSpot.Key;
-                string spotUrl = "";//mswSpot.Value;
-                SwellData data = await _mswDataProvider.GetSwellDataFromWeb(spotUrl);
-                ISet<DayOfWeek> dates = _mswEvaluator.EvaluateMswData(data, MswStrategy.France);
+                SwellData swellData = await _mswDataProvider.GetSwellDataFromWeb(mswSpot.Url);
+                ISet<DayOfWeek> dates = _mswEvaluator.EvaluateMswData(swellData, mswSpot);
                 if (dates.Count != 0)
                 {
-                    messages.Add(new Message() { Dates = dates, SpotName = spotName, SpotUrl = spotUrl });
+                    messages.Add(new Message() { Dates = dates, SpotName = mswSpot.Name, SpotUrl = mswSpot.Url });
                 }
             }
             return messages;
@@ -63,30 +60,16 @@ namespace SurfsUp.SurfsUp.Jobs
         private async Task<List<Message>> CheckBafuSpots()
         {
             var messages = new List<Message>();
-            var spotsItaly = _configuration.GetSection("MswSpotsItaly").GetChildren().ToDictionary(s => s.Key, s => s.Value);
-            foreach (var spot in spotsItaly)
+            var bafuSpots = await _databaseService.GetAllBafuSurfSpotsAsync();
+            foreach (var bafuSpot in bafuSpots)
             {
-                string spotName = spot.Key;
-                string spotUrl = spot.Value;
-                SwellData data = await _mswDataProvider.GetSwellDataFromWeb(spotUrl);
-                ISet<DayOfWeek> dates = _mswEvaluator.EvaluateMswData(data, MswStrategy.Italy);
-                if (dates.Count != 0)
+                BafuData bafuData = await _bafuDataProvider.GetOutflowData(bafuSpot.Url);
+                if (_bafuEvaluator.IsFiring(bafuData, bafuSpot))
                 {
-                    messages.Add(new Message() { Dates = dates, SpotName = spotName, SpotUrl = spotUrl });
+                    messages.Add(new Message() { Dates = bafuData.Dates, SpotName = bafuSpot.Name, SpotUrl = bafuSpot.Url });
                 }
             }
             return messages;
-        }
-
-        private static BafuStrategy Map2Enum(string spotName)
-        {
-            return spotName switch
-            {
-                "Reuss" => BafuStrategy.Reuss,
-                "Birs" => BafuStrategy.Birs,
-                "Thur" => BafuStrategy.Thur,
-                _ => throw new NotImplementedException(),
-            };
         }
     }
 }
