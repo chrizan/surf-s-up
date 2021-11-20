@@ -7,25 +7,47 @@ namespace Database.Service.Tests
     public class DatabaseServiceTest
     {
         [Fact]
-        public async Task Test_DatabaseService_Add_And_Remove_Surfspot()
+        public async Task Test_DatabaseService_Add_And_Remove_MswSurfspot()
         {
             // Arrange
-            const string SpotUrl = "Test Url";
+            const string MswSpotUrl = "Msw Test Url";
             var dbService = new DatabaseService();
 
             // Act
-            await dbService.AddSurfSpotAsync(SpotUrl);
-            var allSurfSpots = await dbService.GetAllSurfSpotsAsync();
+            await dbService.AddMswSurfSpotAsync(MswSpotUrl);
+            var allSurfSpots = await dbService.GetAllMswSurfSpotsAsync();
 
             // Assert
-            allSurfSpots.Should().Contain(s => s == SpotUrl);
+            allSurfSpots.Should().Contain(s => s == MswSpotUrl);
 
             // Act
-            await dbService.RemoveSurfSpotAsync(SpotUrl);
-            allSurfSpots = await dbService.GetAllSurfSpotsAsync();
+            await dbService.RemoveMswSurfSpotAsync(MswSpotUrl);
+            allSurfSpots = await dbService.GetAllMswSurfSpotsAsync();
 
             // Assert
-            allSurfSpots.Should().NotContain(s => s == SpotUrl);
+            allSurfSpots.Should().NotContain(s => s == MswSpotUrl);
+        }
+
+        [Fact]
+        public async Task Test_DatabaseService_Add_And_Remove_BafuSurfspot()
+        {
+            // Arrange
+            const string BafuSpotUrl = "Bafu Test Url";
+            var dbService = new DatabaseService();
+
+            // Act
+            await dbService.AddBafuSurfSpotAsync(BafuSpotUrl);
+            var allSurfSpots = await dbService.GetAllBafuSurfSpotsAsync();
+
+            // Assert
+            allSurfSpots.Should().Contain(s => s == BafuSpotUrl);
+
+            // Act
+            await dbService.RemoveBafuSurfSpotAsync(BafuSpotUrl);
+            allSurfSpots = await dbService.GetAllBafuSurfSpotsAsync();
+
+            // Assert
+            allSurfSpots.Should().NotContain(s => s == BafuSpotUrl);
         }
     }
 }

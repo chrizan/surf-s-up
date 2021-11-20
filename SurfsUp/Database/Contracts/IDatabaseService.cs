@@ -5,10 +5,16 @@ namespace Database.Contracts
 {
     public interface IDatabaseService
     {
-        Task<List<string>> GetAllSurfSpotsAsync();
+        Task<List<string>> GetAllMswSurfSpotsAsync();
 
-        Task AddSurfSpotAsync(string url);
+        Task AddMswSurfSpotAsync(string url);
 
-        Task RemoveSurfSpotAsync(string url);
+        Task RemoveMswSurfSpotAsync(string url);
+
+        Task<List<string>> GetAllBafuSurfSpotsAsync();
+
+        Task AddBafuSurfSpotAsync(string url);
+
+        Task RemoveBafuSurfSpotAsync(string url);
     }
 }

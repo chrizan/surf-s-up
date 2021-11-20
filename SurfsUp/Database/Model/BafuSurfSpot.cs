@@ -2,7 +2,7 @@
 
 namespace Database.Model
 {
-    public class SurfSpot
+    public class BafuSurfSpot
     {
         [Key]
         public string Url { get; set; }

@@ -6,7 +6,8 @@ namespace Database
 {
     public class SurfsUpDbContext : DbContext
     {
-        public DbSet<SurfSpot> SurfSpots { get; set; }
+        public DbSet<MswSurfSpot> MswSurfSpots { get; set; }
+        public DbSet<BafuSurfSpot> BafuSurfSpots { get; set; }
 
         public string DbPath { get; private set; }
 

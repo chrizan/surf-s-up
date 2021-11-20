@@ -15,14 +15,24 @@ namespace Database.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.12");
 
-            modelBuilder.Entity("Database.Model.SurfSpot", b =>
+            modelBuilder.Entity("Database.Model.BafuSurfSpot", b =>
                 {
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Url");
 
-                    b.ToTable("SurfSpots");
+                    b.ToTable("BafuSurfSpots");
+                });
+
+            modelBuilder.Entity("Database.Model.MswSurfSpot", b =>
+                {
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Url");
+
+                    b.ToTable("MswSurfSpots");
                 });
 #pragma warning restore 612, 618
         }

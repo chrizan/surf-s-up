@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(SurfsUpDbContext))]
-    [Migration("20211120143405_InitialCreate")]
+    [Migration("20211120165917_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,14 +17,24 @@ namespace Database.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.12");
 
-            modelBuilder.Entity("Database.Model.SurfSpot", b =>
+            modelBuilder.Entity("Database.Model.BafuSurfSpot", b =>
                 {
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Url");
 
-                    b.ToTable("SurfSpots");
+                    b.ToTable("BafuSurfSpots");
+                });
+
+            modelBuilder.Entity("Database.Model.MswSurfSpot", b =>
+                {
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Url");
+
+                    b.ToTable("MswSurfSpots");
                 });
 #pragma warning restore 612, 618
         }
