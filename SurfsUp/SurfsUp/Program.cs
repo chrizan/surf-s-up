@@ -28,25 +28,25 @@ namespace SurfsUp.SurfsUp
                 })
                 .ConfigureServices(services =>
                 {
+                    services.AddSingleton<IMswDataProvider, MswDataProvider>();
+                    services.AddSingleton<IMswEvaluator, MswEvaluator>();
+                    services.AddSingleton<IMswStrategy, ItalyStrategy>();
+                    services.AddSingleton<IMswStrategy, FranceStrategy>();
+                    services.AddSingleton<IMswStrategy, SpainStrategy>();
+                    services.AddSingleton<IBafuDataProvider, BafuDataProvider>();
+                    services.AddSingleton<IBafuEvaluator, BafuEvaluator>();
+                    services.AddSingleton<IBafuStrategy, ReussStrategy>();
+                    services.AddSingleton<IBafuStrategy, BirsStrategy>();
+                    services.AddSingleton<IBafuStrategy, ThurStrategy>();
+                    services.AddSingleton<IMessenger, MailMessenger>();
+                    services.AddSingleton<IHtmlMailBuilder, HtmlMailBuilder>();
+
                     services.AddQuartz(quartz =>
                     {
                         quartz.UseMicrosoftDependencyInjectionJobFactory();
-                        services.AddTransient<IMswDataProvider, MswDataProvider>();
-                        services.AddTransient<IMswEvaluator, MswEvaluator>();
-                        services.AddTransient<IMswStrategy, ItalyStrategy>();
-                        services.AddTransient<IMswStrategy, FranceStrategy>();
-                        services.AddTransient<IMswStrategy, SpainStrategy>();
-                        services.AddTransient<IBafuDataProvider, BafuDataProvider>();
-                        services.AddTransient<IBafuEvaluator, BafuEvaluator>();
-                        services.AddTransient<IBafuStrategy, ReussStrategy>();
-                        services.AddTransient<IBafuStrategy, BirsStrategy>();
-                        services.AddTransient<IBafuStrategy, ThurStrategy>();
-                        services.AddTransient<IMessenger, MailMessenger>();
-                        services.AddTransient<IHtmlMailBuilder, HtmlMailBuilder>();
 
                         var jobKey = new JobKey("daily0700");
                         quartz.AddJob<Job>(jobKey, j => j.WithDescription("Check Magic Seaweed"));
-
                         quartz.AddTrigger(trigger => trigger
                             .WithIdentity("Cron Trigger")
                             .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(7, 0))
