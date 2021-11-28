@@ -30,8 +30,7 @@ builder.Services.AddQuartz(quartz =>
     quartz.AddJob<QuartzJob>(jobKey, j => j.WithDescription("Check Magic Seaweed"));
     quartz.AddTrigger(trigger => trigger
         .WithIdentity("Cron Trigger")
-        //.WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(7, 0))
-        .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(17, 44))
+        .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(7, 0))
         .ForJob(jobKey)
     );
 });
