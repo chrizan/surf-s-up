@@ -1,11 +1,10 @@
-﻿using SurfsUp.DataProvider.Models;
-using System.Threading.Tasks;
+﻿using SurfsUp.DataProvider.Providers.Msw;
 
 namespace SurfsUp.DataProvider.Contracts
 {
     public interface IMswDataProvider
     {
-        Task<SwellData> GetSwellDataFromWeb(string spotUrl);
-        SwellData GetSwellDataFromFile(string filePath);
+        Task<MswSwellData> GetMswSwellDataFromWeb(string spotUrl);
+        MswSwellData GetMswSwellDataFromFile(string filePath);
     }
 }

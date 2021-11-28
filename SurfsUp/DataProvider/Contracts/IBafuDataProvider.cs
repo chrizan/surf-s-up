@@ -1,5 +1,4 @@
-﻿using SurfsUp.DataProvider.Models;
-using System.Threading.Tasks;
+﻿using SurfsUp.DataProvider.Providers.Bafu;
 
 namespace SurfsUp.DataProvider.Contracts
 {
