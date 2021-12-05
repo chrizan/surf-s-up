@@ -17,14 +17,14 @@ namespace SurfsUp.WebApp.Pages.Spots
         [BindProperty]
         public MswSurfSpot MswSurfSpot { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string? url)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (url == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            MswSurfSpot = await _dataBaseService.GetMswSurfSpotAsync(url);
+            MswSurfSpot = await _dataBaseService.GetMswSurfSpotAsync(id.Value);
 
             if (MswSurfSpot == null)
             {
@@ -33,14 +33,14 @@ namespace SurfsUp.WebApp.Pages.Spots
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string? url)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (url == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            MswSurfSpot = await _dataBaseService.GetMswSurfSpotAsync(url);
+            MswSurfSpot = await _dataBaseService.GetMswSurfSpotAsync(id.Value);
 
             if (MswSurfSpot != null)
             {

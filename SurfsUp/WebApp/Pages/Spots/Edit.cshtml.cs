@@ -18,14 +18,14 @@ namespace SurfsUp.WebApp.Pages.Spots
         [BindProperty]
         public MswSurfSpot MswSurfSpot { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string? url)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (url == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            MswSurfSpot = await _dataBaseService.GetMswSurfSpotAsync(url);
+            MswSurfSpot = await _dataBaseService.GetMswSurfSpotAsync(id.Value);
 
             if (MswSurfSpot == null)
             {
@@ -49,7 +49,7 @@ namespace SurfsUp.WebApp.Pages.Spots
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MovieExists(MswSurfSpot.Url))
+                if (!SurfSpotExists(MswSurfSpot.Id))
                 {
                     return NotFound();
                 }
@@ -62,10 +62,9 @@ namespace SurfsUp.WebApp.Pages.Spots
             return RedirectToPage("./Index");
         }
 
-        private bool MovieExists(string url)
+        private bool SurfSpotExists(int id)
         {
-            List<MswSurfSpot> surfSpots = _dataBaseService.GetAllMswSurfSpotsAsync().Result;
-            return surfSpots.Any(s => s.Url == url);
+            return _dataBaseService.GetAllMswSurfSpotsAsync().Result.Any(s => s.Id == id);
         }
     }
 }

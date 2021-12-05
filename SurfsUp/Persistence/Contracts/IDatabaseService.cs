@@ -6,7 +6,7 @@ namespace SurfsUp.Persistence.Contracts
     {
         Task<List<MswSurfSpot>> GetAllMswSurfSpotsAsync();
 
-        Task<MswSurfSpot> GetMswSurfSpotAsync(string url);
+        Task<MswSurfSpot> GetMswSurfSpotAsync(int id);
 
         Task ChangeMswSurfSpotAsync(MswSurfSpot mswSurfSpot);
 

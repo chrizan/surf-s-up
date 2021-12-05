@@ -12,10 +12,10 @@ namespace SurfsUp.Persistence.Service
             return db.MswSurfSpots.Select(s => s).ToListAsync();
         }
 
-        public Task<MswSurfSpot> GetMswSurfSpotAsync(string url)
+        public Task<MswSurfSpot> GetMswSurfSpotAsync(int id)
         {
             using var db = new SurfsUpDbContext();
-            return db.MswSurfSpots.Where(s => s.Url == url).FirstOrDefaultAsync();
+            return db.MswSurfSpots.Where(s => s.Id == id).FirstOrDefaultAsync();
         }
 
         public Task ChangeMswSurfSpotAsync(MswSurfSpot mswSurfSpot)

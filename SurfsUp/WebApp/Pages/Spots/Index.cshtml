@@ -3,11 +3,12 @@
 @{
 }
 
-<h1>Spots</h1>
+<h1>Magicseaweed Spots</h1>
 
 <p>
     <a asp-page="AddSpot">Add a Spot</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -42,8 +43,8 @@
                 @Html.DisplayFor(modelItem => item.BlurredStars)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-url="@item.Url">Edit</a> |
-                <a asp-page="./Delete" asp-route-url="@item.Url">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
