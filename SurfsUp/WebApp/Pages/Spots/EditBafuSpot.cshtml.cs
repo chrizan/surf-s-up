@@ -6,17 +6,17 @@ using SurfsUp.Persistence.Model;
 
 namespace SurfsUp.WebApp.Pages.Spots
 {
-    public class EditModel : PageModel
+    public class EditBafuSpotModel : PageModel
     {
         private readonly IDatabaseService _dataBaseService;
 
-        public EditModel(IDatabaseService databaseService)
+        public EditBafuSpotModel(IDatabaseService databaseService)
         {
             _dataBaseService = databaseService;
         }
 
         [BindProperty]
-        public MswSurfSpot MswSurfSpot { get; set; }
+        public BafuSurfSpot BafuSurfSpot { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -25,9 +25,9 @@ namespace SurfsUp.WebApp.Pages.Spots
                 return NotFound();
             }
 
-            MswSurfSpot = await _dataBaseService.GetMswSurfSpotAsync(id.Value);
+            BafuSurfSpot = await _dataBaseService.GetBafuSurfSpotAsync(id.Value);
 
-            if (MswSurfSpot == null)
+            if (BafuSurfSpot == null)
             {
                 return NotFound();
             }
@@ -45,11 +45,11 @@ namespace SurfsUp.WebApp.Pages.Spots
 
             try
             {
-                await _dataBaseService.ChangeMswSurfSpotAsync(MswSurfSpot);
+                await _dataBaseService.ChangeBafuSurfSpotAsync(BafuSurfSpot);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SurfSpotExists(MswSurfSpot.Id))
+                if (!SurfSpotExists(BafuSurfSpot.Id))
                 {
                     return NotFound();
                 }
@@ -64,7 +64,7 @@ namespace SurfsUp.WebApp.Pages.Spots
 
         private bool SurfSpotExists(int id)
         {
-            return _dataBaseService.GetAllMswSurfSpotsAsync().Result.Any(s => s.Id == id);
+            return _dataBaseService.GetAllBafuSurfSpotsAsync().Result.Any(s => s.Id == id);
         }
     }
 }

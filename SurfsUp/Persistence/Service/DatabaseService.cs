@@ -45,6 +45,19 @@ namespace SurfsUp.Persistence.Service
             return db.BafuSurfSpots.Select(s => s).ToListAsync();
         }
 
+        public Task<BafuSurfSpot> GetBafuSurfSpotAsync(int id)
+        {
+            using var db = new SurfsUpDbContext();
+            return db.BafuSurfSpots.Where(s => s.Id == id).FirstOrDefaultAsync();
+        }
+
+        public Task ChangeBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
+        {
+            using var db = new SurfsUpDbContext();
+            db.Attach(bafuSurfSpot).State = EntityState.Modified;
+            return db.SaveChangesAsync();
+        }
+
         public Task AddBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
         {
             using var db = new SurfsUpDbContext();

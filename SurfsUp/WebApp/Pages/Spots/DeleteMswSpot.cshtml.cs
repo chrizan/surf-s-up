@@ -5,11 +5,11 @@ using SurfsUp.Persistence.Model;
 
 namespace SurfsUp.WebApp.Pages.Spots
 {
-    public class DeleteModel : PageModel
+    public class DeleteMswSpotModel : PageModel
     {
         private readonly IDatabaseService _dataBaseService;
 
-        public DeleteModel(IDatabaseService databaseService)
+        public DeleteMswSpotModel(IDatabaseService databaseService)
         {
             _dataBaseService = databaseService;
         }

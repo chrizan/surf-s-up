@@ -5,11 +5,11 @@ using SurfsUp.Persistence.Model;
 
 namespace SurfsUp.WebApp.Pages.Spots
 {
-    public class AddSpotModel : PageModel
+    public class AddBafuSpotModel : PageModel
     {
         private readonly IDatabaseService _dataBaseService;
 
-        public AddSpotModel(IDatabaseService databaseService)
+        public AddBafuSpotModel(IDatabaseService databaseService)
         {
             _dataBaseService = databaseService;
         }
@@ -20,7 +20,7 @@ namespace SurfsUp.WebApp.Pages.Spots
         }
 
         [BindProperty]
-        public MswSurfSpot MswSurfSpot { get; set; }
+        public BafuSurfSpot BafuSurfSpot { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -30,7 +30,7 @@ namespace SurfsUp.WebApp.Pages.Spots
                 return Page();
             }
 
-            await _dataBaseService.AddMswSurfSpotAsync(MswSurfSpot);
+            await _dataBaseService.AddBafuSurfSpotAsync(BafuSurfSpot);
 
             return RedirectToPage("./Index");
         }

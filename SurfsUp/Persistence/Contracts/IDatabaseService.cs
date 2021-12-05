@@ -16,6 +16,10 @@ namespace SurfsUp.Persistence.Contracts
 
         Task<List<BafuSurfSpot>> GetAllBafuSurfSpotsAsync();
 
+        Task<BafuSurfSpot> GetBafuSurfSpotAsync(int id);
+
+        Task ChangeBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot);
+
         Task AddBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot);
 
         Task RemoveBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot);

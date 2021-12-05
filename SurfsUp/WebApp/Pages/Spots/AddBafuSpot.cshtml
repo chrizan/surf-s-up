@@ -1,0 +1,41 @@
+﻿@page
+@model SurfsUp.WebApp.Pages.Spots.AddBafuSpotModel
+@{
+}
+
+<h1>Add a Spot</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BafuSurfSpot.Name" class="control-label"></label>
+                <input asp-for="BafuSurfSpot.Name" class="form-control" />
+                <span asp-validation-for="BafuSurfSpot.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BafuSurfSpot.Url" class="control-label"></label>
+                <input asp-for="BafuSurfSpot.Url" class="form-control" />
+                <span asp-validation-for="BafuSurfSpot.Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BafuSurfSpot.Outflow" class="control-label"></label>
+                <input asp-for="BafuSurfSpot.Outflow" class="form-control" />
+                <span asp-validation-for="BafuSurfSpot.Outflow" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to Spots</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -13,11 +13,14 @@ namespace SurfsUp.WebApp.Pages.Spots
             _dataBaseService = databaseService;
         }
 
-        public IList<MswSurfSpot> Spots { get; set; }
+        public IList<MswSurfSpot> MswSurfSpots { get; set; }
+
+        public IList<BafuSurfSpot> BafuSurfSpots { get; set; }
 
         public async Task OnGetAsync()
         {
-            Spots = await _dataBaseService.GetAllMswSurfSpotsAsync();
+            MswSurfSpots = await _dataBaseService.GetAllMswSurfSpotsAsync();
+            BafuSurfSpots = await _dataBaseService.GetAllBafuSurfSpotsAsync();
         }
     }
 }
