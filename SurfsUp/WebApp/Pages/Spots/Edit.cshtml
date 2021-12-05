@@ -1,0 +1,48 @@
+﻿@page
+@model SurfsUp.WebApp.Pages.Spots.EditModel
+@{
+}
+
+<h1>Edit</h1>
+
+<h4>Spot</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MswSurfSpot.Url" />
+            <div class="form-group">
+                <label asp-for="MswSurfSpot.Url" class="control-label"></label>
+                <input asp-for="MswSurfSpot.Url" class="form-control" />
+                <span asp-validation-for="MswSurfSpot.Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MswSurfSpot.Name" class="control-label"></label>
+                <input asp-for="MswSurfSpot.Name" class="form-control" />
+                <span asp-validation-for="MswSurfSpot.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MswSurfSpot.FullStars" class="control-label"></label>
+                <input asp-for="MswSurfSpot.FullStars" class="form-control" />
+                <span asp-validation-for="MswSurfSpot.FullStars" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MswSurfSpot.BlurredStars" class="control-label"></label>
+                <input asp-for="MswSurfSpot.BlurredStars" class="form-control" />
+                <span asp-validation-for="MswSurfSpot.BlurredStars" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -6,44 +6,57 @@ namespace SurfsUp.Persistence.Service
 {
     public class DatabaseService : IDatabaseService
     {
-        public async Task<List<MswSurfSpot>> GetAllMswSurfSpotsAsync()
+        public Task<List<MswSurfSpot>> GetAllMswSurfSpotsAsync()
         {
             using var db = new SurfsUpDbContext();
-            return await db.MswSurfSpots.Select(s => s).ToListAsync();
+            return db.MswSurfSpots.Select(s => s).ToListAsync();
         }
 
-        public async Task AddMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
+        public Task<MswSurfSpot> GetMswSurfSpotAsync(string url)
+        {
+            using var db = new SurfsUpDbContext();
+            return db.MswSurfSpots.Where(s => s.Url == url).FirstOrDefaultAsync();
+        }
+
+        public Task ChangeMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
+        {
+            using var db = new SurfsUpDbContext();
+            db.Attach(mswSurfSpot).State = EntityState.Modified;
+            return db.SaveChangesAsync();
+        }
+
+        public Task AddMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
         {
             using var db = new SurfsUpDbContext();
             db.Add(mswSurfSpot);
-            await db.SaveChangesAsync();
+            return db.SaveChangesAsync();
         }
 
-        public async Task RemoveMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
+        public Task RemoveMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
         {
             using var db = new SurfsUpDbContext();
             db.Remove(mswSurfSpot);
-            await db.SaveChangesAsync();
+            return db.SaveChangesAsync();
         }
 
-        public async Task<List<BafuSurfSpot>> GetAllBafuSurfSpotsAsync()
+        public Task<List<BafuSurfSpot>> GetAllBafuSurfSpotsAsync()
         {
             using var db = new SurfsUpDbContext();
-            return await db.BafuSurfSpots.Select(s => s).ToListAsync();
+            return db.BafuSurfSpots.Select(s => s).ToListAsync();
         }
 
-        public async Task AddBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
+        public Task AddBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
         {
             using var db = new SurfsUpDbContext();
             db.Add(bafuSurfSpot);
-            await db.SaveChangesAsync();
+            return db.SaveChangesAsync();
         }
 
-        public async Task RemoveBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
+        public Task RemoveBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
         {
             using var db = new SurfsUpDbContext();
             db.Remove(bafuSurfSpot);
-            await db.SaveChangesAsync();
+            return db.SaveChangesAsync();
         }
     }
 }

@@ -1,0 +1,51 @@
+﻿@page
+@model SurfsUp.WebApp.Pages.Spots.IndexModel
+@{
+}
+
+<h1>Spots</h1>
+
+<p>
+    <a asp-page="AddSpot">Add a Spot</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Spots[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Spots[0].Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Spots[0].FullStars)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Spots[0].BlurredStars)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Spots) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullStars)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlurredStars)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-url="@item.Url">Edit</a> |
+                <a asp-page="./Delete" asp-route-url="@item.Url">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

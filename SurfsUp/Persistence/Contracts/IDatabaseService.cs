@@ -6,6 +6,10 @@ namespace SurfsUp.Persistence.Contracts
     {
         Task<List<MswSurfSpot>> GetAllMswSurfSpotsAsync();
 
+        Task<MswSurfSpot> GetMswSurfSpotAsync(string url);
+
+        Task ChangeMswSurfSpotAsync(MswSurfSpot mswSurfSpot);
+
         Task AddMswSurfSpotAsync(MswSurfSpot mswSurfSpot);
 
         Task RemoveMswSurfSpotAsync(MswSurfSpot mswSurfSpot);
