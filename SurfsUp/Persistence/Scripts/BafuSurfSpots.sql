@@ -1,18 +1,21 @@
 ﻿INSERT INTO BafuSurfSpots
-("Url", "Name", Outflow)
+(Id, "Name", "Url", Outflow)
 Values
 (
-'https://www.hydrodaten.admin.ch/de/2018.html',
+1,
 'Reuss',
+'https://www.hydrodaten.admin.ch/de/2018.html',
 250
 ),
 (
-'https://www.hydrodaten.admin.ch/de/2106.html',
+2,
 'Birs',
+'https://www.hydrodaten.admin.ch/de/2106.html',
 70
 ),
 (
-'https://www.hydrodaten.admin.ch/de/2181.html',
+3,
 'Thur',
+'https://www.hydrodaten.admin.ch/de/2181.html',
 400
 )

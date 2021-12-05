@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace SurfsUp.Persistence.Migrations
 {
     public partial class InitialCreate : Migration
@@ -10,27 +12,31 @@ namespace SurfsUp.Persistence.Migrations
                 name: "BafuSurfSpots",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Url = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
                     Outflow = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BafuSurfSpots", x => x.Url);
+                    table.PrimaryKey("PK_BafuSurfSpots", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "MswSurfSpots",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Url = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
                     FullStars = table.Column<int>(type: "INTEGER", nullable: false),
                     BlurredStars = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MswSurfSpots", x => x.Url);
+                    table.PrimaryKey("PK_MswSurfSpots", x => x.Id);
                 });
         }
 

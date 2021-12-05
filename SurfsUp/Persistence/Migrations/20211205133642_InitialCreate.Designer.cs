@@ -2,39 +2,49 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using SurfsUp.Persistence;
+
+#nullable disable
 
 namespace SurfsUp.Persistence.Migrations
 {
     [DbContext(typeof(SurfsUpDbContext))]
-    [Migration("20211120180548_InitialCreate")]
+    [Migration("20211205133642_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.12");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
-            modelBuilder.Entity("Database.Model.BafuSurfSpot", b =>
+            modelBuilder.Entity("SurfsUp.Persistence.Model.BafuSurfSpot", b =>
                 {
-                    b.Property<string>("Url")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Outflow")
                         .HasColumnType("REAL");
 
-                    b.HasKey("Url");
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("BafuSurfSpots");
                 });
 
-            modelBuilder.Entity("Database.Model.MswSurfSpot", b =>
+            modelBuilder.Entity("SurfsUp.Persistence.Model.MswSurfSpot", b =>
                 {
-                    b.Property<string>("Url")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("BlurredStars")
                         .HasColumnType("INTEGER");
@@ -43,9 +53,14 @@ namespace SurfsUp.Persistence.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Url");
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("MswSurfSpots");
                 });
