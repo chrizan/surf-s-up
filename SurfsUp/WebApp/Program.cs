@@ -23,6 +23,8 @@ builder.Services.AddSingleton<IBafuEvaluator, BafuEvaluator>();
 builder.Services.AddSingleton<IMessenger, MailMessenger>();
 builder.Services.AddSingleton<IHtmlMailBuilder, HtmlMailBuilder>();
 builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
+builder.Services.AddPooledDbContextFactory<SurfsUpDbContext>(options =>
+    options.UseSqlite($"Data Source={SurfsUpDbContext.GetDefaultDbPath()}"));
 
 builder.Services.AddQuartz(quartz =>
 {
@@ -42,7 +44,7 @@ builder.Services.AddQuartzHostedService(options =>
 
 var app = builder.Build();
 
-using (var db = new SurfsUpDbContext())
+using (var db = app.Services.GetRequiredService<IDbContextFactory<SurfsUpDbContext>>().CreateDbContext())
 {
     db.Database.Migrate();
 }

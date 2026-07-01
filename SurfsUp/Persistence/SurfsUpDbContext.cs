@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SurfsUp.Persistence.Model;
 
 namespace SurfsUp.Persistence
@@ -8,9 +8,17 @@ namespace SurfsUp.Persistence
         public DbSet<MswSurfSpot> MswSurfSpots { get; set; }
         public DbSet<BafuSurfSpot> BafuSurfSpots { get; set; }
 
-        public string DbPath { get; private set; }
-
         public SurfsUpDbContext()
+        {
+        }
+
+        public SurfsUpDbContext(DbContextOptions<SurfsUpDbContext> options) : base(options)
+        {
+        }
+
+        // The default location for the Sqlite database file, used when no
+        // DbContextOptions are supplied (e.g. by EF tooling or the parameterless ctor).
+        public static string GetDefaultDbPath()
         {
             /*
              * Environment.SpecialFolder.LocalApplicationData:
@@ -19,12 +27,15 @@ namespace SurfsUp.Persistence
              */
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
-            DbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}surfsup.db";
+            return $"{path}{System.IO.Path.DirectorySeparatorChar}surfsup.db";
         }
 
-        // The following configures EF to create a Sqlite database file in the
-        // special "local" folder for your platform.
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlite($"Data Source={DbPath}");
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite($"Data Source={GetDefaultDbPath()}");
+            }
+        }
     }
 }

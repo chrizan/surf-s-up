@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SurfsUp.Persistence.Contracts;
 using SurfsUp.Persistence.Model;
 
@@ -6,70 +6,77 @@ namespace SurfsUp.Persistence.Service
 {
     public class DatabaseService : IDatabaseService
     {
-        public Task<List<MswSurfSpot>> GetAllMswSurfSpotsAsync()
+        private readonly IDbContextFactory<SurfsUpDbContext> _contextFactory;
+
+        public DatabaseService(IDbContextFactory<SurfsUpDbContext> contextFactory)
         {
-            using var db = new SurfsUpDbContext();
-            return db.MswSurfSpots.Select(s => s).ToListAsync();
+            _contextFactory = contextFactory;
         }
 
-        public Task<MswSurfSpot> GetMswSurfSpotAsync(int id)
+        public async Task<List<MswSurfSpot>> GetAllMswSurfSpotsAsync()
         {
-            using var db = new SurfsUpDbContext();
-            return db.MswSurfSpots.Where(s => s.Id == id).FirstOrDefaultAsync();
+            await using var db = await _contextFactory.CreateDbContextAsync();
+            return await db.MswSurfSpots.ToListAsync();
         }
 
-        public Task ChangeMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
+        public async Task<MswSurfSpot> GetMswSurfSpotAsync(int id)
         {
-            using var db = new SurfsUpDbContext();
+            await using var db = await _contextFactory.CreateDbContextAsync();
+            return await db.MswSurfSpots.Where(s => s.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task ChangeMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
+        {
+            await using var db = await _contextFactory.CreateDbContextAsync();
             db.Attach(mswSurfSpot).State = EntityState.Modified;
-            return db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
-        public Task AddMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
+        public async Task AddMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
         {
-            using var db = new SurfsUpDbContext();
+            await using var db = await _contextFactory.CreateDbContextAsync();
             db.Add(mswSurfSpot);
-            return db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
-        public Task RemoveMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
+        public async Task RemoveMswSurfSpotAsync(MswSurfSpot mswSurfSpot)
         {
-            using var db = new SurfsUpDbContext();
+            await using var db = await _contextFactory.CreateDbContextAsync();
             db.Remove(mswSurfSpot);
-            return db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
-        public Task<List<BafuSurfSpot>> GetAllBafuSurfSpotsAsync()
+        public async Task<List<BafuSurfSpot>> GetAllBafuSurfSpotsAsync()
         {
-            using var db = new SurfsUpDbContext();
-            return db.BafuSurfSpots.Select(s => s).ToListAsync();
+            await using var db = await _contextFactory.CreateDbContextAsync();
+            return await db.BafuSurfSpots.ToListAsync();
         }
 
-        public Task<BafuSurfSpot> GetBafuSurfSpotAsync(int id)
+        public async Task<BafuSurfSpot> GetBafuSurfSpotAsync(int id)
         {
-            using var db = new SurfsUpDbContext();
-            return db.BafuSurfSpots.Where(s => s.Id == id).FirstOrDefaultAsync();
+            await using var db = await _contextFactory.CreateDbContextAsync();
+            return await db.BafuSurfSpots.Where(s => s.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task ChangeBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
+        public async Task ChangeBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
         {
-            using var db = new SurfsUpDbContext();
+            await using var db = await _contextFactory.CreateDbContextAsync();
             db.Attach(bafuSurfSpot).State = EntityState.Modified;
-            return db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
-        public Task AddBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
+        public async Task AddBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
         {
-            using var db = new SurfsUpDbContext();
+            await using var db = await _contextFactory.CreateDbContextAsync();
             db.Add(bafuSurfSpot);
-            return db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
 
-        public Task RemoveBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
+        public async Task RemoveBafuSurfSpotAsync(BafuSurfSpot bafuSurfSpot)
         {
-            using var db = new SurfsUpDbContext();
+            await using var db = await _contextFactory.CreateDbContextAsync();
             db.Remove(bafuSurfSpot);
-            return db.SaveChangesAsync();
+            await db.SaveChangesAsync();
         }
     }
 }
