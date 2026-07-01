@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Providers.Bafu;
 using SurfsUp.DataProvider.Providers.Msw;
+using SurfsUp.Persistence;
 using SurfsUp.Persistence.Contracts;
 using SurfsUp.Persistence.Service;
 using SurfsUp.WebApp.Messengers;
@@ -24,8 +26,6 @@ builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
 
 builder.Services.AddQuartz(quartz =>
 {
-    quartz.UseMicrosoftDependencyInjectionJobFactory();
-
     var jobKey = new JobKey("daily0700");
     quartz.AddJob<QuartzJob>(jobKey, j => j.WithDescription("Check Magic Seaweed"));
     quartz.AddTrigger(trigger => trigger
@@ -41,6 +41,11 @@ builder.Services.AddQuartzHostedService(options =>
 });
 
 var app = builder.Build();
+
+using (var db = new SurfsUpDbContext())
+{
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
