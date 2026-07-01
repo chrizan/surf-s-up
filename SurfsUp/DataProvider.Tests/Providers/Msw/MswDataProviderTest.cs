@@ -2,13 +2,14 @@
 using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Providers.Msw;
 using System;
+using System.IO;
 using Xunit;
 
 namespace SurfsUp.DataProvider.Tests.Providers.Msw
 {
     public class MswDataProviderTest
     {
-        private const string MswVieuxBoucauForecast = @"TestFile\MswVieuxBoucau.html";
+        private static readonly string MswVieuxBoucauForecast = Path.Combine("TestFile", "MswVieuxBoucau.html");
 
         [Fact]
         public void Test_GetSwellDataFromFile_VieuxBoucau()
