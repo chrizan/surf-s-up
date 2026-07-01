@@ -14,7 +14,7 @@ namespace SurfsUp.DataProvider.Providers.Msw
         {
             HtmlDocument htmlDoc = new();
             htmlDoc.Load(filePath);
-            long utcTimeZone = long.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathToTimezoneElement).GetAttributeValue("data-timezone", "0"));
+            long utcTimeZone = long.Parse(htmlDoc.DocumentNode.SelectRequiredNode(XpathToTimezoneElement, "timezone").GetAttributeValue("data-timezone", "0"));
             return GetMswSwellData(htmlDoc, utcTimeZone);
         }
 
@@ -22,7 +22,7 @@ namespace SurfsUp.DataProvider.Providers.Msw
         {
             HtmlWeb web = new();
             HtmlDocument htmlDoc = await web.LoadFromWebAsync(spotUrl);
-            long utcTimeZone = int.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathToTimezoneElement).GetAttributeValue("data-timezone", "0"));
+            long utcTimeZone = int.Parse(htmlDoc.DocumentNode.SelectRequiredNode(XpathToTimezoneElement, "timezone").GetAttributeValue("data-timezone", "0"));
             return GetMswSwellData(htmlDoc, utcTimeZone);
         }
 

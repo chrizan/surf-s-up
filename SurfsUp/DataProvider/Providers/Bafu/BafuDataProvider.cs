@@ -23,9 +23,9 @@ namespace SurfsUp.DataProvider.Providers.Bafu
         {
             BafuData bafuData = new()
             {
-                OutflowCurrent = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathOutflowCurrent).InnerText),
-                OutflowMax24hours = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XpathOutflowMax24hours).InnerText),
-                DegreeCelsius = double.Parse(htmlDoc.DocumentNode.SelectSingleNode(XPathTemperature).InnerText),
+                OutflowCurrent = double.Parse(htmlDoc.DocumentNode.SelectRequiredNode(XpathOutflowCurrent, "current outflow").InnerText),
+                OutflowMax24hours = double.Parse(htmlDoc.DocumentNode.SelectRequiredNode(XpathOutflowMax24hours, "24h max outflow").InnerText),
+                DegreeCelsius = double.Parse(htmlDoc.DocumentNode.SelectRequiredNode(XPathTemperature, "temperature").InnerText),
                 Dates = new HashSet<DayOfWeek>() { DateTime.Today.DayOfWeek }
             };
             return bafuData;
