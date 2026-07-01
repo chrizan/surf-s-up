@@ -8,6 +8,7 @@ namespace SurfsUp.WebApp.Messengers
     public class MailMessenger : IMessenger
     {
         private readonly IHtmlMailBuilder _htmlMailBuilder;
+        private readonly ILogger<MailMessenger> _logger;
 
         private string _from;
         private string _to;
@@ -15,10 +16,11 @@ namespace SurfsUp.WebApp.Messengers
         private int _port;
         private string _password;
 
-        public MailMessenger(IConfiguration configuration, IHtmlMailBuilder htmlMailBuilder)
+        public MailMessenger(IConfiguration configuration, IHtmlMailBuilder htmlMailBuilder, ILogger<MailMessenger> logger)
         {
             ReadConfiguration(configuration);
             _htmlMailBuilder = htmlMailBuilder;
+            _logger = logger;
         }
 
         public Task SendMessage(List<Message> messages)
@@ -48,7 +50,7 @@ namespace SurfsUp.WebApp.Messengers
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Exception caught in MailMessenger: {e}");
+                _logger.LogError(e, "Failed to send mail");
             }
             return Task.CompletedTask;
         }
