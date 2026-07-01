@@ -1,4 +1,4 @@
-﻿using Quartz;
+using Quartz;
 using SurfsUp.DataProvider.Contracts;
 using SurfsUp.DataProvider.Providers.Bafu;
 using SurfsUp.DataProvider.Providers.Msw;
@@ -17,13 +17,15 @@ namespace SurfsUp.WebApp.QuartzJobs
         private readonly IMessenger _messenger;
         private readonly IMswEvaluator _mswEvaluator;
         private readonly IBafuEvaluator _bafuEvaluator;
+        private readonly ILogger<QuartzJob> _logger;
 
         public QuartzJob(IDatabaseService databaseService,
             IMswDataProvider mswDataProvider,
             IBafuDataProvider bafuDataProvider,
             IMessenger messenger,
             IMswEvaluator mswEvaluator,
-            IBafuEvaluator bafuEvaluator)
+            IBafuEvaluator bafuEvaluator,
+            ILogger<QuartzJob> logger)
         {
             _mswDataProvider = mswDataProvider;
             _databaseService = databaseService;
@@ -31,6 +33,7 @@ namespace SurfsUp.WebApp.QuartzJobs
             _messenger = messenger;
             _mswEvaluator = mswEvaluator;
             _bafuEvaluator = bafuEvaluator;
+            _logger = logger;
         }
 
         public async Task Execute(IJobExecutionContext context)
@@ -47,11 +50,18 @@ namespace SurfsUp.WebApp.QuartzJobs
             var mswSpots = await _databaseService.GetAllMswSurfSpotsAsync();
             foreach (var mswSpot in mswSpots)
             {
-                MswSwellData mswSwellData = await _mswDataProvider.GetMswSwellDataFromWeb(mswSpot.Url);
-                ISet<DayOfWeek> dates = _mswEvaluator.EvaluateMswData(mswSwellData, mswSpot);
-                if (dates.Count != 0)
+                try
                 {
-                    messages.Add(new Message() { Dates = dates, SpotName = mswSpot.Name, SpotUrl = mswSpot.Url });
+                    MswSwellData mswSwellData = await _mswDataProvider.GetMswSwellDataFromWeb(mswSpot.Url);
+                    ISet<DayOfWeek> dates = _mswEvaluator.EvaluateMswData(mswSwellData, mswSpot);
+                    if (dates.Count != 0)
+                    {
+                        messages.Add(new Message() { Dates = dates, SpotName = mswSpot.Name, SpotUrl = mswSpot.Url });
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Failed to check MSW spot {SpotName} ({SpotUrl})", mswSpot.Name, mswSpot.Url);
                 }
             }
             return messages;
@@ -63,10 +73,17 @@ namespace SurfsUp.WebApp.QuartzJobs
             var bafuSpots = await _databaseService.GetAllBafuSurfSpotsAsync();
             foreach (var bafuSpot in bafuSpots)
             {
-                BafuData bafuData = await _bafuDataProvider.GetOutflowData(bafuSpot.Url);
-                if (_bafuEvaluator.IsFiring(bafuData, bafuSpot))
+                try
                 {
-                    messages.Add(new Message() { Dates = bafuData.Dates, SpotName = bafuSpot.Name, SpotUrl = bafuSpot.Url });
+                    BafuData bafuData = await _bafuDataProvider.GetOutflowData(bafuSpot.Url);
+                    if (_bafuEvaluator.IsFiring(bafuData, bafuSpot))
+                    {
+                        messages.Add(new Message() { Dates = bafuData.Dates, SpotName = bafuSpot.Name, SpotUrl = bafuSpot.Url });
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Failed to check Bafu spot {SpotName} ({SpotUrl})", bafuSpot.Name, bafuSpot.Url);
                 }
             }
             return messages;
